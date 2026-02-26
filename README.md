@@ -28,11 +28,14 @@ Use A records pointing to GitHub Pages:
 - `185.199.110.153`
 - `185.199.111.153`
 
-### Optional `www` subdomain
-Use a CNAME:
+### `www` subdomain (`www.luris.com.au`)
+Use a CNAME record:
 
-- `www` → `username.github.io`
+- `www` → `bobby114i.github.io`
 
-> Replace `username` with the actual GitHub username that owns this repository.
+Both the apex and www records must be configured — GitHub Pages checks both when
+verifying the custom domain (the www variant is the "alternate name" shown in
+Pages settings). Missing either record produces a `NotServedByPagesError`.
 
-After DNS propagates, GitHub will provision TLS automatically.
+After DNS propagates (up to 48 hours), GitHub will provision TLS automatically
+and the **Enforce HTTPS** option will become available in Pages settings.
