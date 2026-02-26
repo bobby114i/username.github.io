@@ -478,6 +478,61 @@ li {
   color: var(--text);
 }
 
+/* ── Policy Document ─────────────────────────────────── */
+
+.policy-doc {
+  max-width: 720px;
+}
+
+.policy-doc .product-hero {
+  padding-bottom: 0;
+}
+
+.policy-section {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.policy-section h2 {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.policy-section h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.policy-section ul {
+  margin: 0.5rem 0 1rem;
+}
+
+.policy-section p:last-child {
+  margin-bottom: 0;
+}
+
+.policy-link {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--border);
+  transition: text-decoration-color var(--ease);
+}
+
+.policy-link:hover {
+  text-decoration-color: var(--text);
+}
+
 /* ── Responsive ──────────────────────────────────────── */
 
 @media (max-width: 768px) {
