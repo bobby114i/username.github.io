@@ -1,18 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap');
 
 :root {
-  --bg: #070b12;
-  --panel: #0f1622;
-  --panel-strong: #0d1420;
-  --border: #263348;
-  --border-hover: #3d567a;
-  --text: #f3f6fc;
-  --muted: #abb8cf;
-  --accent: #8ab4ff;
-  --accent-soft: #1c2c49;
-  --radius-md: 0.875rem;
-  --radius-lg: 1.25rem;
-  --ease: 200ms ease;
+  --bg: #F8F7F3;
+  --surface: #F0EEE9;
+  --border: #E2DFD8;
+  --border-hover: #B5B2A8;
+  --text: #0D0C09;
+  --muted: #6C6B61;
+  --muted-light: #A09E95;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --ease: 180ms ease;
 }
 
 *, *::before, *::after {
@@ -27,8 +25,8 @@ body {
 
 body {
   min-height: 100vh;
-  font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(160deg, #0b1219 0%, #070b12 60%);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -37,9 +35,9 @@ body {
 /* ── Header ──────────────────────────────────────────── */
 
 .site-header {
-  max-width: 1240px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1.75rem 2.75rem 1.5rem;
+  padding: 1.5rem 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,99 +56,118 @@ body {
 
 .eyebrow {
   margin: 0;
-  color: var(--accent);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.78rem;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
 }
 
 .tagline {
-  margin: 0.35rem 0 0;
-  color: var(--muted);
-  font-size: 0.84rem;
-  max-width: 40ch;
-  line-height: 1.5;
+  display: none;
 }
 
 .top-nav {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.3rem;
   align-items: center;
+  gap: 0.125rem;
 }
 
 .top-nav a {
   text-decoration: none;
   color: var(--muted);
-  border: 1px solid transparent;
-  border-radius: 999px;
-  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-md);
+  padding: 0.4rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
-  transition: color var(--ease), background var(--ease), border-color var(--ease);
+  transition: color var(--ease), background var(--ease);
   white-space: nowrap;
 }
 
 .top-nav a:hover {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--border);
+  background: var(--surface);
 }
 
 .top-nav a.active {
-  color: var(--accent);
-  background: var(--accent-soft);
-  border-color: rgba(138, 180, 255, 0.2);
+  color: var(--text);
+  background: var(--surface);
 }
 
 /* ── Layout ──────────────────────────────────────────── */
 
 .layout {
-  max-width: 1240px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5rem 2.75rem 3.5rem;
-  display: grid;
-  gap: 1.25rem;
+  padding: 0 2.5rem 5rem;
 }
 
-.home-layout {
-  grid-template-columns: repeat(12, 1fr);
+/* ── Hero (Homepage) ─────────────────────────────────── */
+
+.hero-section {
+  padding: 6rem 0 5rem;
+  text-align: center;
 }
 
-.product-layout {
-  grid-template-columns: 1fr;
+.hero-section .kicker {
+  font-size: 0.75rem;
+  color: var(--muted-light);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  margin: 0 0 1.5rem;
 }
 
-/* ── Cards ───────────────────────────────────────────── */
+.hero-section h1 {
+  font-family: "DM Serif Display", Georgia, "Times New Roman", serif;
+  font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 auto 1.5rem;
+  max-width: 22ch;
+}
 
-.card {
-  background: linear-gradient(150deg, #101826 0%, var(--panel-strong) 100%);
+.hero-section .hero-desc {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 52ch;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+.hero-points {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.hero-points span {
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 2rem 2.25rem;
-  box-shadow: 0 4px 24px rgb(0 0 0 / 25%), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--surface);
 }
 
-.hero-card {
-  grid-column: span 12;
-  position: relative;
-  overflow: hidden;
-  padding: 2.75rem 2.5rem;
+/* ── Section ─────────────────────────────────────────── */
+
+.section {
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--border);
 }
 
-.hero-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 90% 15%, rgba(138, 180, 255, 0.08) 0%, transparent 55%);
-  pointer-events: none;
-}
-
-.home-layout .card:nth-child(2),
-.home-layout .card:nth-child(3) {
-  grid-column: span 6;
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted-light);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 2.5rem;
 }
 
 /* ── Typography ──────────────────────────────────────── */
@@ -159,9 +176,9 @@ body {
   margin: 0 0 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: 0.68rem;
-  color: var(--accent);
-  font-weight: 600;
+  font-size: 0.72rem;
+  color: var(--muted-light);
+  font-weight: 500;
 }
 
 h1,
@@ -172,27 +189,29 @@ h3 {
 }
 
 h1 {
+  font-family: "DM Serif Display", Georgia, serif;
   margin-bottom: 1rem;
-  max-width: 22ch;
-  font-size: clamp(1.85rem, 3.5vw, 2.9rem);
-  font-weight: 700;
-  line-height: 1.18;
-  letter-spacing: -0.025em;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  margin-bottom: 0.9rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  font-family: "DM Serif Display", Georgia, serif;
+  margin-bottom: 1rem;
+  font-size: 1.65rem;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
 h3 {
   margin-bottom: 0.5rem;
-  font-size: 1.025rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.35;
+  letter-spacing: -0.01em;
 }
 
 p,
@@ -205,79 +224,71 @@ td {
 
 p {
   margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
 }
 
 .lead {
-  margin-top: -0.15rem;
-  margin-bottom: 1.1rem;
-  color: #cdd8f0;
-  font-weight: 500;
-  font-size: 1.05rem;
-  line-height: 1.5;
-}
-
-/* ── Hero Points / Tags ──────────────────────────────── */
-
-.hero-points {
-  margin-top: 1.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.hero-points span {
-  background: rgba(138, 180, 255, 0.08);
-  border: 1px solid rgba(138, 180, 255, 0.2);
-  border-radius: 999px;
-  padding: 0.38rem 0.85rem;
-  color: #b8d0ff;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
 }
 
 /* ── Product Suite Grid ──────────────────────────────── */
 
 .suite-grid {
   display: grid;
-  gap: 0.75rem;
-  margin-top: 0.75rem;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .product-tile {
-  padding: 1.2rem 1.35rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  background: rgba(7, 11, 18, 0.6);
-  transition: border-color var(--ease), transform var(--ease), box-shadow var(--ease);
+  padding: 2rem;
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--ease);
   display: flex;
   flex-direction: column;
 }
 
+.product-tile:nth-child(even) {
+  border-right: none;
+}
+
+.product-tile:nth-child(n+3) {
+  border-bottom: none;
+}
+
 .product-tile:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgb(0 0 0 / 30%);
+  background: var(--surface);
 }
 
 .product-tile h3 {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
 .product-tile p {
-  margin: 0 0 0.6rem;
-  font-size: 0.875rem;
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
   flex: 1;
 }
 
-/* ── Links / CTAs ────────────────────────────────────── */
+/* ── Text Links / CTAs ───────────────────────────────── */
 
 .text-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  color: var(--accent);
+  gap: 0.3rem;
+  color: var(--text);
   text-decoration: none;
-  font-size: 0.83rem;
+  font-size: 0.85rem;
   font-weight: 500;
   transition: gap var(--ease);
 }
@@ -297,15 +308,14 @@ p {
 .risk-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 0.5rem;
 }
 
 .risk-table th,
 .risk-table td {
   text-align: left;
-  padding: 0.8rem 0.75rem;
+  padding: 0.9rem 0;
   border-bottom: 1px solid var(--border);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
 }
 
 .risk-table tr:last-child td {
@@ -313,11 +323,11 @@ p {
 }
 
 .risk-table th {
-  color: #8a9cb5;
-  font-weight: 600;
+  color: var(--muted-light);
+  font-weight: 500;
   font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
 }
 
 .risk-table td {
@@ -325,12 +335,14 @@ p {
 }
 
 .risk-table td:last-child {
-  color: #9bbcef;
+  color: var(--text);
   font-weight: 500;
 }
 
 .risk-table tbody tr:hover td {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface);
+  padding-left: 0.5rem;
+  transition: all var(--ease);
 }
 
 /* ── Two-Column Layout ───────────────────────────────── */
@@ -338,25 +350,33 @@ p {
 .cols-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 ul {
-  margin: 0;
-  padding-left: 1.15rem;
+  margin: 0.5rem 0 0;
+  padding-left: 1.1rem;
 }
 
 li {
-  padding: 0.2rem 0;
+  padding: 0.3rem 0;
   font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ── Product Page Hero ───────────────────────────────── */
+
+.product-hero {
+  padding: 4rem 0 3.5rem;
+  max-width: 720px;
 }
 
 /* ── Footer ──────────────────────────────────────────── */
 
 .site-footer {
-  max-width: 1240px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5rem 2.75rem 2.5rem;
+  padding: 2rem 2.5rem 3rem;
   border-top: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
@@ -367,41 +387,37 @@ li {
 
 .site-footer p {
   margin: 0;
-  font-size: 0.78rem;
-  color: #4a5b70;
+  font-size: 0.8rem;
+  color: var(--muted-light);
 }
 
 .footer-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
+  gap: 0.125rem;
 }
 
 .footer-nav a {
   text-decoration: none;
-  color: #4a5b70;
-  font-size: 0.78rem;
+  color: var(--muted-light);
+  font-size: 0.8rem;
   padding: 0.2rem 0.5rem;
-  border-radius: 0.3rem;
+  border-radius: var(--radius-md);
   transition: color var(--ease);
 }
 
 .footer-nav a:hover {
-  color: var(--muted);
+  color: var(--text);
 }
 
 /* ── Responsive ──────────────────────────────────────── */
 
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
   .site-header {
     flex-direction: column;
     align-items: flex-start;
-    padding: 1.5rem 1.25rem 1rem;
-    gap: 1rem;
-  }
-
-  .brand-block {
-    min-width: 0;
+    padding: 1.25rem 1.25rem 1rem;
+    gap: 0.75rem;
   }
 
   .top-nav {
@@ -409,38 +425,54 @@ li {
   }
 
   .layout {
-    padding: 1rem 1.25rem 2.5rem;
-    gap: 1rem;
+    padding: 0 1.25rem 4rem;
   }
 
-  .home-layout,
-  .product-layout {
+  .hero-section {
+    padding: 4rem 0 3rem;
+    text-align: left;
+  }
+
+  .hero-section h1 {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .hero-section .hero-desc {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .hero-points {
+    justify-content: flex-start;
+  }
+
+  .suite-grid {
     grid-template-columns: 1fr;
   }
 
-  .home-layout .card:nth-child(2),
-  .home-layout .card:nth-child(3),
-  .hero-card {
-    grid-column: auto;
+  .product-tile {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
   }
 
-  .hero-card {
-    padding: 2rem 1.5rem;
-  }
-
-  .card {
-    padding: 1.5rem;
+  .product-tile:last-child {
+    border-bottom: none;
   }
 
   .cols-2 {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
+  }
+
+  .product-hero {
+    padding: 3rem 0 2.5rem;
   }
 
   .site-footer {
     flex-direction: column;
     align-items: flex-start;
-    padding: 1.25rem 1.25rem 2rem;
+    padding: 1.5rem 1.25rem 2.5rem;
     gap: 1rem;
   }
 }
