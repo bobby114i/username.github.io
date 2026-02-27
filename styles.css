@@ -439,6 +439,35 @@ li {
   max-width: 720px;
 }
 
+.screen-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.screen-card {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.screen-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid var(--border);
+}
+
+.screen-card figcaption {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
 /* ── Footer ──────────────────────────────────────────── */
 
 .site-footer {
@@ -591,6 +620,10 @@ li {
   .cols-2 {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .screen-grid {
+    grid-template-columns: 1fr;
   }
 
   .product-hero {
