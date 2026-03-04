@@ -9,25 +9,30 @@
     <meta name="description" content="Data Processing Addendum (DPA) for Luris Pty Ltd — governing the processing of Personal Information on behalf of Customers under Australian privacy law." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" defer></script>
   </head>
   <body>
     <header class="site-header">
-      <div class="brand-block">
+      <div class="site-header-inner">
         <a class="brand-link" href="index.html">
           <p class="eyebrow">Luris</p>
         </a>
+        <nav class="top-nav" aria-label="Primary navigation">
+          <a href="crossexam-ai.html">CrossExam AI</a>
+          <a href="costguard.html">CostGuard</a>
+          <a href="court-filing-readiness-checker.html">Filing Checker</a>
+          <a href="limitguard.html">LimitGuard</a>
+          <a class="nav-cta" href="contact.html">Request a Demo</a>
+        </nav>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
       </div>
-      <nav class="top-nav" aria-label="Primary navigation">
-        <a href="crossexam-ai.html">CrossExam AI</a>
-        <a href="costguard.html">CostGuard</a>
-        <a href="court-filing-readiness-checker.html">Filing Checker</a>
-        <a href="limitguard.html">LimitGuard</a>
-      </nav>
     </header>
 
-    <main class="layout">
+    <main class="page-wrapper">
+      <section class="full-section full-section--light">
+        <div class="section-inner">
       <div class="policy-doc">
 
         <div class="product-hero">
@@ -287,20 +292,33 @@
         </div>
 
       </div>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
-      <p>© 2026 Luris Pty Ltd</p>
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <a href="index.html">Home</a>
-        <a href="crossexam-ai.html">CrossExam AI</a>
-        <a href="costguard.html">CostGuard</a>
-        <a href="court-filing-readiness-checker.html">Filing Checker</a>
-        <a href="limitguard.html">LimitGuard</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="license-terms.html">Terms of Service</a>
-        <a class="active" href="dpa.html">DPA</a>
-      </nav>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <p class="eyebrow">Luris</p>
+          <p>Purpose-built software for Australian legal professionals.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <a href="crossexam-ai.html">CrossExam AI</a>
+          <a href="costguard.html">CostGuard</a>
+          <a href="court-filing-readiness-checker.html">Filing Checker</a>
+          <a href="limitguard.html">LimitGuard</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="license-terms.html">Terms of Service</a>
+          <a href="dpa.html">DPA</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Luris Pty Ltd</p>
+      </div>
     </footer>
   </body>
 </html>

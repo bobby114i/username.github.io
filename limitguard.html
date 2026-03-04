@@ -9,103 +9,127 @@
     <meta name="description" content="LimitGuard centralises limitation calculation, jurisdictional logic, and deadline risk classification." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" defer></script>
   </head>
   <body>
     <header class="site-header">
-      <div class="brand-block">
+      <div class="site-header-inner">
         <a class="brand-link" href="index.html">
           <p class="eyebrow">Luris</p>
         </a>
+        <nav class="top-nav" aria-label="Primary navigation">
+          <a href="crossexam-ai.html">CrossExam AI</a>
+          <a href="costguard.html">CostGuard</a>
+          <a href="court-filing-readiness-checker.html">Filing Checker</a>
+          <a class="active" href="limitguard.html">LimitGuard</a>
+          <a class="nav-cta" href="contact.html">Request a Demo</a>
+        </nav>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
       </div>
-      <nav class="top-nav" aria-label="Primary navigation">
-        <a href="crossexam-ai.html">CrossExam AI</a>
-        <a href="costguard.html">CostGuard</a>
-        <a href="court-filing-readiness-checker.html">Filing Checker</a>
-        <a class="active" href="limitguard.html">LimitGuard</a>
-      </nav>
     </header>
 
-    <main class="layout">
-      <div class="product-hero">
-        <p class="kicker">Product 04</p>
-        <h1>LimitGuard</h1>
-        <p class="lead">Limitation Period Calculation and Deadline Risk Tracker</p>
-        <p>
-          LimitGuard is a structured limitation period analysis and tracking system designed to reduce
-          professional negligence exposure arising from missed deadlines.
-        </p>
-        <p>
-          It centralises limitation calculation, jurisdictional logic, and deadline risk classification in a controlled environment.
-        </p>
-      </div>
-
-      <section class="section">
-        <h2>Product Screens</h2>
-        <p>Preview the key LimitGuard workflows across dashboard monitoring, matter triage, and detailed limitation analysis.</p>
-        <div class="screen-grid">
-          <figure class="screen-card">
-            <img src="assets/limitguard-dashboard.png" alt="LimitGuard dashboard showing deadline risk cards, urgent matters, and activity widgets" loading="lazy" />
-            <figcaption>Dashboard view for limitation risk monitoring and alert prioritisation.</figcaption>
-          </figure>
-          <figure class="screen-card">
-            <img src="assets/limitguard-matters.png" alt="LimitGuard matters list with search, filters, jurisdiction columns, and status badges" loading="lazy" />
-            <figcaption>Matters list with searchable records and risk/status classification.</figcaption>
-          </figure>
-          <figure class="screen-card">
-            <img src="assets/limitguard-calculation.png" alt="LimitGuard calculation details page showing effective date and manual review notice" loading="lazy" />
-            <figcaption>Detailed calculation view with effective limitation date and review context.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="cols-2">
-          <div>
-            <h2>Core Function</h2>
-            <ul>
-              <li>Jurisdiction-specific limitation logic</li>
-              <li>Trigger date identification guidance</li>
-              <li>Rolling calculation of expiry dates</li>
-              <li>Risk band classification (low, moderate, critical)</li>
-              <li>Deadline dashboard tracking</li>
-            </ul>
-          </div>
-          <div>
-            <h2>Designed for</h2>
-            <ul>
-              <li>Civil litigators</li>
-              <li>Personal injury firms</li>
-              <li>Commercial practices</li>
-              <li>Government agencies</li>
-            </ul>
+    <main class="page-wrapper">
+      <section class="full-section full-section--dark">
+        <div class="section-inner">
+          <div class="product-hero">
+            <p class="kicker">Product 04</p>
+            <h1>LimitGuard</h1>
+            <p class="lead">Limitation Period Calculation and Deadline Risk Tracker</p>
+            <p>
+              A structured limitation period analysis and tracking system designed to reduce
+              professional negligence exposure arising from missed deadlines.
+            </p>
+            <p>
+              Centralises limitation calculation, jurisdictional logic, and deadline risk classification in a controlled environment.
+            </p>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <h2>Why It Matters</h2>
-        <p>Missed limitation periods are among the most catastrophic errors in legal practice.</p>
-        <p>
-          LimitGuard helps firms reduce catastrophic risk, centralise deadline logic,
-          create auditable limitation analysis, and support professional indemnity risk mitigation.
-        </p>
+      <section class="full-section full-section--light">
+        <div class="section-inner animate-on-scroll">
+          <h2>Product Screens</h2>
+          <p>Preview the key LimitGuard workflows across dashboard monitoring, matter triage, and detailed limitation analysis.</p>
+          <div class="screen-grid">
+            <figure class="screen-card animate-on-scroll" data-delay="1">
+              <img src="assets/limitguard-dashboard.png" alt="LimitGuard dashboard showing deadline risk cards, urgent matters, and activity widgets" loading="lazy" />
+              <figcaption>Dashboard view for limitation risk monitoring and alert prioritisation.</figcaption>
+            </figure>
+            <figure class="screen-card animate-on-scroll" data-delay="2">
+              <img src="assets/limitguard-matters.png" alt="LimitGuard matters list with search, filters, jurisdiction columns, and status badges" loading="lazy" />
+              <figcaption>Matters list with searchable records and risk/status classification.</figcaption>
+            </figure>
+            <figure class="screen-card animate-on-scroll" data-delay="3">
+              <img src="assets/limitguard-calculation.png" alt="LimitGuard calculation details page showing effective date and manual review notice" loading="lazy" />
+              <figcaption>Detailed calculation view with effective limitation date and review context.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="full-section full-section--alt">
+        <div class="section-inner animate-on-scroll">
+          <div class="cols-2">
+            <div>
+              <h2>Core Function</h2>
+              <ul>
+                <li>Jurisdiction-specific limitation logic</li>
+                <li>Trigger date identification guidance</li>
+                <li>Rolling calculation of expiry dates</li>
+                <li>Risk band classification (low, moderate, critical)</li>
+                <li>Deadline dashboard tracking</li>
+              </ul>
+            </div>
+            <div>
+              <h2>Designed for</h2>
+              <ul>
+                <li>Civil litigators</li>
+                <li>Personal injury firms</li>
+                <li>Commercial practices</li>
+                <li>Government agencies</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="full-section full-section--dark">
+        <div class="section-inner animate-on-scroll">
+          <h2>Why It Matters</h2>
+          <p>Missed limitation periods are among the most catastrophic errors in legal practice.</p>
+          <p>
+            LimitGuard helps firms reduce catastrophic risk, centralise deadline logic,
+            create auditable limitation analysis, and support professional indemnity risk mitigation.
+          </p>
+        </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>© 2026 Luris Pty Ltd</p>
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <a href="index.html">Home</a>
-        <a href="crossexam-ai.html">CrossExam AI</a>
-        <a href="costguard.html">CostGuard</a>
-        <a href="court-filing-readiness-checker.html">Filing Checker</a>
-        <a href="limitguard.html">LimitGuard</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="license-terms.html">Terms of Service</a>
-        <a href="dpa.html">DPA</a>
-      </nav>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <p class="eyebrow">Luris</p>
+          <p>Purpose-built software for Australian legal professionals.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <a href="crossexam-ai.html">CrossExam AI</a>
+          <a href="costguard.html">CostGuard</a>
+          <a href="court-filing-readiness-checker.html">Filing Checker</a>
+          <a href="limitguard.html">LimitGuard</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="license-terms.html">Terms of Service</a>
+          <a href="dpa.html">DPA</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Luris Pty Ltd</p>
+      </div>
     </footer>
   </body>
 </html>
