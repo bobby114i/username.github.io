@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <script>if(location.protocol!=='https:')location.replace('https:'+location.href.slice(location.protocol.length));</script>
-    <title>Court Filing Readiness Checker | Luris</title>
-    <meta name="description" content="Court Filing Readiness Checker prevents registry rejection, procedural defects, and filing compliance oversights." />
+    <title>Contact | Luris</title>
+    <meta name="description" content="Get in touch with Luris to request a demo or learn more about our legal risk infrastructure products." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -22,9 +22,9 @@
         <nav class="top-nav" aria-label="Primary navigation">
           <a href="crossexam-ai.html">CrossExam AI</a>
           <a href="costguard.html">CostGuard</a>
-          <a class="active" href="court-filing-readiness-checker.html">Filing Checker</a>
+          <a href="court-filing-readiness-checker.html">Filing Checker</a>
           <a href="limitguard.html">LimitGuard</a>
-          <a class="nav-cta" href="contact.html">Request a Demo</a>
+          <a class="nav-cta active" href="contact.html">Request a Demo</a>
         </nav>
         <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
       </div>
@@ -34,54 +34,34 @@
       <section class="full-section full-section--dark">
         <div class="section-inner">
           <div class="product-hero">
-            <p class="kicker">Product 03</p>
-            <h1>Court Filing Readiness Checker</h1>
-            <p class="lead">Procedural Risk and Registry Rejection Prevention Tool</p>
-            <p>
-              Prevents court registry rejection, procedural defects,
-              and compliance oversights in originating and interlocutory filings.
-            </p>
-            <p>
-              Extracts and validates procedural components of pleadings and filings against structured rule frameworks.
-            </p>
+            <p class="kicker">Contact</p>
+            <h1>Request a Demo</h1>
+            <p class="lead">Learn how Luris can strengthen your legal operations with purpose-built, privacy-conscious tools.</p>
           </div>
         </div>
       </section>
 
       <section class="full-section full-section--light">
         <div class="section-inner animate-on-scroll">
-          <div class="cols-2">
-            <div>
-              <h2>Core Function</h2>
-              <ul>
-                <li>Checks structural compliance across court, division, and registry</li>
-                <li>Validates required procedural fields</li>
-                <li>Flags jurisdictional inconsistencies</li>
-                <li>Identifies missing formal elements</li>
-                <li>Assigns procedural risk bands</li>
-              </ul>
+          <form class="contact-form" action="mailto:contact@luris.com.au" method="POST" enctype="text/plain">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Your full name" />
             </div>
-            <div>
-              <h2>Designed for</h2>
-              <ul>
-                <li>Litigation teams</li>
-                <li>Graduate lawyers</li>
-                <li>Government litigators</li>
-                <li>High-volume filing practices</li>
-              </ul>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="you@example.com" />
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="full-section full-section--alt">
-        <div class="section-inner animate-on-scroll">
-          <h2>Why It Matters</h2>
-          <p>Registry rejection causes delay, cost, reputational harm, and tactical disadvantage.</p>
-          <p>
-            The Court Filing Readiness Checker reduces preventable filing risk before documents are lodged.
-            It is quality control software for litigation workflow.
-          </p>
+            <div class="form-group">
+              <label for="organisation">Organisation <span style="font-weight:400;color:var(--text-muted);">(optional)</span></label>
+              <input type="text" id="organisation" name="organisation" placeholder="Your firm or organisation" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message <span style="font-weight:400;color:var(--text-muted);">(optional)</span></label>
+              <textarea id="message" name="message" placeholder="Tell us about your needs or which products interest you"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Request</button>
+          </form>
         </div>
       </section>
     </main>
