@@ -120,9 +120,9 @@ p:last-child {
 }
 
 .section-label {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--accent-teal);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin: 0 0 2rem;
@@ -160,7 +160,19 @@ p:last-child {
 
 .brand-link {
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-link::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-teal);
+  border-radius: 2px;
+  flex-shrink: 0;
 }
 
 .brand-link .eyebrow {
@@ -252,6 +264,12 @@ p:last-child {
   color: var(--text-on-dark-body);
 }
 
+.full-section--hero {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(0, 180, 216, 0.15) 0%, transparent 65%),
+    var(--dark-primary);
+}
+
 .full-section--dark h1,
 .full-section--dark h2,
 .full-section--dark h3 {
@@ -265,7 +283,7 @@ p:last-child {
 }
 
 .full-section--dark .section-label {
-  color: var(--text-on-dark-muted);
+  color: var(--accent-teal);
 }
 
 .full-section--light {
@@ -329,13 +347,13 @@ p:last-child {
 }
 
 .hero-points span {
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: var(--radius-full);
   padding: 0.4rem 1rem;
-  color: var(--text-on-dark-body);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.8125rem;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* ── Product Hero (Product Pages) ────────────────────── */
@@ -440,11 +458,18 @@ p:last-child {
 
 .feature-list li::before {
   content: '\2713';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  min-width: 1.25rem;
   color: var(--accent-teal);
-  font-weight: 700;
-  font-size: 0.85rem;
+  background: rgba(0, 180, 216, 0.1);
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 800;
   flex-shrink: 0;
-  margin-top: 0.15em;
 }
 
 /* ── Product Suite Grid ──────────────────────────────── */
@@ -481,17 +506,31 @@ p:last-child {
   flex: 1;
 }
 
+.tile-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
 /* ── Text Links / CTAs ───────────────────────────────── */
 
 .text-link {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: var(--accent-indigo);
+  color: var(--accent-teal);
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 600;
-  transition: gap var(--ease);
+  transition: gap var(--ease), color var(--ease);
+}
+
+.text-link:hover {
+  color: var(--accent-teal-hover);
 }
 
 .text-link::after {
@@ -502,10 +541,6 @@ p:last-child {
 
 .text-link:hover::after {
   transform: translateX(4px);
-}
-
-.full-section--dark .text-link {
-  color: var(--accent-teal);
 }
 
 /* ── Buttons ─────────────────────────────────────────── */
@@ -712,7 +747,7 @@ li {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: 3rem;
 }
 
