@@ -372,13 +372,27 @@ p:last-child {
   background: rgba(255, 255, 255, 0.06);
 }
 
-/* ── Hero Visual (Risk Dashboard Card) ───────────────── */
+/* ── Hero Visual (Landing Background Image) ──────────── */
 
 .hero-visual {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.hero-photo {
+  width: min(100%, 620px);
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-lg);
+  background-image:
+    linear-gradient(125deg, rgba(2, 6, 23, 0.68), rgba(2, 6, 23, 0.2) 45%, rgba(2, 6, 23, 0.58)),
+    url("Gemini_Generated_Image_ze8ua0ze8ua0ze8u (1).png"),
+    url('https://images.pexels.com/photos/5998226/pexels-photo-5998226.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1200&w=2000');
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 30px 55px rgba(0, 0, 0, 0.48);
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .risk-card {
