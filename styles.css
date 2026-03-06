@@ -766,6 +766,15 @@ li {
   color: var(--text-on-dark-muted);
 }
 
+/* ── Compliance Note ─────────────────────────────────── */
+
+.compliance-note {
+  font-size: 0.875rem;
+  color: var(--text-body);
+  line-height: 1.65;
+  margin: 0;
+}
+
 /* ── Policy Document ─────────────────────────────────── */
 
 .policy-doc {
