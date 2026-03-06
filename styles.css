@@ -214,20 +214,21 @@ p:last-child {
   display: inline-flex;
   align-items: center;
   padding: 0.5rem 1.25rem;
-  background: var(--accent-teal);
-  color: var(--dark-primary);
+  background: transparent;
+  color: var(--text-on-dark);
   font-size: 0.875rem;
   font-weight: 600;
   border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   text-decoration: none;
-  transition: background var(--ease), transform var(--ease);
+  transition: background var(--ease), border-color var(--ease);
   margin-left: 0.5rem;
   white-space: nowrap;
 }
 
 .nav-cta:hover {
-  background: var(--accent-teal-hover);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .mobile-menu-toggle {
@@ -265,8 +266,10 @@ p:last-child {
 }
 
 .full-section--hero {
+  padding: 0 2rem;
   background:
-    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(0, 180, 216, 0.15) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 70% at 75% 55%, rgba(0, 180, 216, 0.13) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 20% 20%, rgba(99, 102, 241, 0.07) 0%, transparent 60%),
     var(--dark-primary);
 }
 
@@ -297,8 +300,17 @@ p:last-child {
 /* ── Hero Section (Homepage) ─────────────────────────── */
 
 .hero-section {
-  text-align: center;
-  padding: 7rem 0 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  min-height: calc(100vh - 72px);
+  padding: 5rem 0;
+  text-align: left;
+}
+
+.hero-content {
+  max-width: 540px;
 }
 
 .hero-section .kicker {
@@ -306,17 +318,20 @@ p:last-child {
 }
 
 .hero-section h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--text-on-dark);
-  max-width: 18ch;
-  margin: 0 auto 1.5rem;
+  max-width: 16ch;
+  margin: 0 0 1.5rem;
 }
 
 .hero-section .hero-desc {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: var(--text-on-dark-body);
-  max-width: 52ch;
-  margin: 0 auto 2.5rem;
-  line-height: 1.7;
+  max-width: 46ch;
+  margin: 0 0 2.5rem;
+  line-height: 1.75;
 }
 
 .hero-cta {
@@ -347,13 +362,168 @@ p:last-child {
 }
 
 .hero-points span {
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-full);
   padding: 0.4rem 1rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.8125rem;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Hero Visual (Risk Dashboard Card) ───────────────── */
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.risk-card {
+  width: 100%;
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.risk-card--back {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  left: 16px;
+  bottom: 16px;
+  max-width: none;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.risk-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1.125rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-on-dark);
+}
+
+.risk-card-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-teal);
+  animation: pulse-dot 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 180, 216, 0.5); }
+  50% { box-shadow: 0 0 0 5px rgba(0, 180, 216, 0); }
+}
+
+.risk-card-meta {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--text-on-dark-muted);
+  font-weight: 400;
+}
+
+.risk-card-body {
+  padding: 0 1.25rem;
+}
+
+.risk-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 1rem;
+}
+
+.risk-row:last-child {
+  border-bottom: none;
+}
+
+.risk-row-label {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.8125rem;
+  color: var(--text-on-dark-body);
+  font-weight: 500;
+}
+
+.risk-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.risk-indicator--red   { background: #F87171; box-shadow: 0 0 6px rgba(248, 113, 113, 0.6); }
+.risk-indicator--amber { background: #FBBF24; box-shadow: 0 0 6px rgba(251, 191, 36, 0.5); }
+.risk-indicator--green { background: #34D399; box-shadow: 0 0 6px rgba(52, 211, 153, 0.5); }
+
+.risk-row-stat {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.risk-count {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-on-dark);
+  line-height: 1.2;
+}
+
+.risk-sublabel {
+  font-size: 0.7rem;
+  color: var(--text-on-dark-muted);
+  font-weight: 400;
+}
+
+.risk-card-footer {
+  padding: 1rem 1.25rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.risk-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.risk-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.risk-bar-fill {
+  width: 78%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-teal), #34D399);
+  border-radius: 2px;
+}
+
+.risk-bar-label {
+  font-size: 0.7rem;
+  color: var(--text-on-dark-muted);
+  white-space: nowrap;
+  font-weight: 500;
 }
 
 /* ── Product Hero (Product Pages) ────────────────────── */
@@ -935,19 +1105,23 @@ li {
     padding: 3.5rem 1.25rem;
   }
 
+  .full-section--hero {
+    padding: 0 1.25rem;
+  }
+
   .hero-section {
-    text-align: left;
+    grid-template-columns: 1fr;
+    min-height: unset;
+    gap: 3rem;
     padding: 4rem 0 3rem;
   }
 
   .hero-section h1 {
-    margin-left: 0;
-    margin-right: 0;
+    max-width: unset;
   }
 
-  .hero-section .hero-desc {
-    margin-left: 0;
-    margin-right: 0;
+  .hero-visual {
+    display: none;
   }
 
   .hero-points {
