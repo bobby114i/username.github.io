@@ -226,10 +226,18 @@ p:last-child {
   white-space: nowrap;
 }
 
+.top-nav .nav-cta {
+  color: #001321;
+}
+
 .nav-cta:hover {
   background: var(--accent-teal-hover);
   color: var(--text-on-dark);
   border-color: rgba(255, 255, 255, 0.25);
+}
+
+.top-nav .nav-cta:hover {
+  color: var(--text-on-dark);
 }
 
 .mobile-menu-toggle {
@@ -269,9 +277,11 @@ p:last-child {
 .full-section--hero {
   padding: 0 2rem;
   background:
-    radial-gradient(ellipse 55% 70% at 75% 55%, rgba(0, 180, 216, 0.13) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 40% at 20% 20%, rgba(99, 102, 241, 0.07) 0%, transparent 60%),
-    var(--dark-primary);
+    linear-gradient(105deg, rgba(2, 6, 23, 0.88) 0%, rgba(2, 6, 23, 0.65) 45%, rgba(2, 6, 23, 0.9) 100%),
+    url("Gemini_Generated_Image_ze8ua0ze8ua0ze8u (1).png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .full-section--dark h1,
