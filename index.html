@@ -35,17 +35,24 @@
     </header>
 
     <main class="page-wrapper">
+      <!-- Hero: split layout with text left, product visual right -->
       <section class="full-section full-section--dark full-section--hero">
+        <div class="hero-bg-image" aria-hidden="true">
+          <img src="Gemini_Generated_Image_ze8ua0ze8ua0ze8u (1).png" alt="" />
+        </div>
         <div class="section-inner">
-          <div class="hero-section">
+          <div class="hero-split">
             <div class="hero-content">
               <p class="kicker">Legal risk infrastructure</p>
               <h1>Strengthen legal operations before <span class="text-gradient">risk becomes loss.</span></h1>
               <p class="hero-desc">
-                Desktop-first tools for costs compliance, procedural quality control,
-                and limitation risk management.
+                Purpose-built desktop tools for costs compliance, procedural quality control,
+                and limitation risk management — designed for Australian legal professionals.
               </p>
-              <a class="hero-cta" href="contact.html">Request a Demo</a>
+              <div class="hero-actions">
+                <a class="hero-cta" href="contact.html">Request a Demo</a>
+                <a class="btn-secondary" href="#products">Explore Products</a>
+              </div>
               <div class="hero-points" role="list" aria-label="Positioning highlights">
                 <span role="listitem">Desktop-first</span>
                 <span role="listitem">Privacy-conscious</span>
@@ -53,38 +60,69 @@
                 <span role="listitem">Australian legal context</span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="full-section full-section--light">
-        <div class="section-inner animate-on-scroll">
-          <p class="section-label">Privacy Infrastructure</p>
-          <div class="infra-layout">
-            <div class="infra-intro">
-              <h2>Privacy-Focused Software for Australian Legal Practice</h2>
-              <p class="lead">Luris develops desktop-first and secure cloud-deployable software designed specifically for Australian legal professionals.</p>
-              <blockquote class="infra-callout">
-                <p>Client information must remain controlled, compartmentalised, and auditable.</p>
-              </blockquote>
-              <p>Each application addresses a specific category of professional risk — not experimental legal technology, but operational tools.</p>
-            </div>
-            <div class="infra-features">
-              <p class="feature-label">All Luris applications are engineered to support:</p>
-              <ul class="feature-list">
-                <li>Australian onshore data hosting (Sydney region)</li>
-                <li>Australian Privacy Principles (Privacy Act 1988) security expectations</li>
-                <li>Encryption of all stored and transmitted information</li>
-                <li>Strict separation between different firms' data</li>
-              </ul>
+            <div class="hero-visual">
+              <div class="hero-demo-window">
+                <div class="demo-window-bar">
+                  <span class="demo-dot demo-dot--red"></span>
+                  <span class="demo-dot demo-dot--yellow"></span>
+                  <span class="demo-dot demo-dot--green"></span>
+                  <span class="demo-window-title">Luris Platform</span>
+                </div>
+                <div class="demo-window-body">
+                  <!-- Replace this placeholder with your product demo GIF -->
+                  <div class="demo-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    <p>Product demo GIF</p>
+                    <p class="demo-placeholder-sub">Replace with your demo recording</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="full-section full-section--alt">
+      <!-- Trust bar -->
+      <section class="full-section trust-bar">
+        <div class="section-inner">
+          <div class="trust-row">
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <div>
+                <p class="trust-title">Australian Data Hosting</p>
+                <p class="trust-desc">Sydney region infrastructure</p>
+              </div>
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <div>
+                <p class="trust-title">End-to-End Encryption</p>
+                <p class="trust-desc">Data at rest and in transit</p>
+              </div>
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <div>
+                <p class="trust-title">Privacy Act 1988</p>
+                <p class="trust-desc">APP-compliant architecture</p>
+              </div>
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+              <div>
+                <p class="trust-title">Desktop-First</p>
+                <p class="trust-desc">Data stays on your machine</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Products -->
+      <section id="products" class="full-section full-section--alt">
         <div class="section-inner">
           <p class="section-label">Products</p>
+          <h2 class="section-heading">Tools built for the way legal teams actually work</h2>
           <div class="suite-grid" role="list" aria-label="Product list">
             <article class="product-tile animate-on-scroll" role="listitem" data-delay="1">
               <div class="product-tile-icon product-tile-icon--indigo">
@@ -123,7 +161,33 @@
         </div>
       </section>
 
+      <!-- How it works -->
       <section class="full-section full-section--light">
+        <div class="section-inner">
+          <p class="section-label">How It Works</p>
+          <h2 class="section-heading">From risk identification to operational control</h2>
+          <div class="steps-grid">
+            <div class="step-card animate-on-scroll" data-delay="1">
+              <div class="step-number">01</div>
+              <h3>Identify</h3>
+              <p>Surface compliance gaps, procedural risks, and deadline exposures across your matters.</p>
+            </div>
+            <div class="step-card animate-on-scroll" data-delay="2">
+              <div class="step-number">02</div>
+              <h3>Analyse</h3>
+              <p>AI-assisted analysis provides structured risk assessments tailored to Australian legal frameworks.</p>
+            </div>
+            <div class="step-card animate-on-scroll" data-delay="3">
+              <div class="step-number">03</div>
+              <h3>Act</h3>
+              <p>Automated alerts, audit trails, and role-based dashboards keep your team ahead of every deadline.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Platform -->
+      <section class="full-section full-section--dark">
         <div class="section-inner animate-on-scroll">
           <p class="section-label">Platform</p>
           <div class="infra-layout">
@@ -132,28 +196,53 @@
               <p class="lead">One workspace. Every tool. All your matters.</p>
               <p>Luris Platform Professional brings LimitGuard, the Court Filing Checker, and CostGuard together under a single login — giving your firm a unified view of legal risk across every matter, without switching between applications.</p>
               <p><strong>Consistent oversight, auditable workflows, and role-appropriate access</strong> — for the whole team.</p>
-              <p>Partners get firm-wide risk visibility. Solicitors work their own matters. Administrators manage access and provisioning. Everyone sees what they need and nothing they don't.</p>
             </div>
             <div class="infra-features">
-              <p class="feature-label">What's included</p>
-              <ul class="feature-list">
+              <p class="feature-label" style="color: var(--text-on-dark-muted);">What's included</p>
+              <ul class="feature-list feature-list--dark">
                 <li>Firm-wide risk dashboard across all matters and tools</li>
                 <li>Central matters workspace linking deadline, filing, and costs analysis</li>
                 <li>AI-assisted matter and portfolio risk summaries</li>
                 <li>Role-based access for solicitors, partners, and administrators</li>
                 <li>Automated hourly deadline and compliance alerts</li>
                 <li>Full audit log of all system and user actions</li>
-                <li>Aggregated reporting across filing reviews and costs audits</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Privacy -->
+      <section class="full-section full-section--light">
+        <div class="section-inner animate-on-scroll">
+          <p class="section-label">Privacy Infrastructure</p>
+          <div class="infra-layout">
+            <div class="infra-intro">
+              <h2>Privacy-Focused Software for Australian Legal Practice</h2>
+              <p class="lead">Luris develops desktop-first and secure cloud-deployable software designed specifically for Australian legal professionals.</p>
+              <blockquote class="infra-callout">
+                <p>Client information must remain controlled, compartmentalised, and auditable.</p>
+              </blockquote>
+              <p>Each application addresses a specific category of professional risk — not experimental legal technology, but operational tools.</p>
+            </div>
+            <div class="infra-features">
+              <p class="feature-label">All Luris applications are engineered to support:</p>
+              <ul class="feature-list">
+                <li>Australian onshore data hosting (Sydney region)</li>
+                <li>Australian Privacy Principles (Privacy Act 1988) security expectations</li>
+                <li>Encryption of all stored and transmitted information</li>
+                <li>Strict separation between different firms' data</li>
               </ul>
               <div class="compliance-badge">
                 <p class="feature-label" style="margin-top:2rem;">Infrastructure</p>
-                <p class="compliance-note">Hosted on Google Cloud's Australian infrastructure, certified for government and regulated industry use — including environments suited to sensitive and government-classified information. <a class="policy-link" href="https://cloud.google.com/security/compliance/hcf-australia" target="_blank" rel="noopener">Google Cloud HCF Australia &rarr;</a></p>
+                <p class="compliance-note">Hosted on Google Cloud's Australian infrastructure, certified for government and regulated industry use. <a class="policy-link" href="https://cloud.google.com/security/compliance/hcf-australia" target="_blank" rel="noopener">Google Cloud HCF Australia &rarr;</a></p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- CTA -->
       <section class="full-section full-section--dark">
         <div class="section-inner animate-on-scroll cta-section">
           <h2>Ready to strengthen your legal operations?</h2>
