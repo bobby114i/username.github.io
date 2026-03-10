@@ -59,9 +59,9 @@
               <span class="hero-gradient">In every matter.</span>
             </h1>
             <p class="hero-desc">
-              Purpose-built desktop tools for costs compliance, procedural
-              quality control, and limitation risk management — designed
-              for Australian legal professionals.
+              The automated compliance layer for Australian legal practice.
+              Eliminate missed deadlines, registry rejections, and
+              unrecovered costs — all from one secure workspace.
             </p>
             <div class="hero-actions">
               <a class="btn-primary-hero" href="contact.html">Request a Demo</a>
@@ -185,6 +185,15 @@
               <div class="bento-canvas-wrap">
                 <canvas id="limitguardCanvas" aria-hidden="true"></canvas>
                 <div class="bento-canvas-fade"></div>
+                <!-- Glassmorphic UI overlay -->
+                <div class="bento-ui-overlay bento-ui-overlay--amber" aria-hidden="true">
+                  <div class="bento-ui-row">
+                    <span class="bento-ui-dot bento-ui-dot--amber"></span>
+                    <span class="bento-ui-text">Limitation Warning</span>
+                  </div>
+                  <div class="bento-ui-detail">Smith v Jones</div>
+                  <div class="bento-ui-meta">3 days remaining</div>
+                </div>
               </div>
               <div class="bento-content">
                 <div class="bento-badge bento-badge--amber">LimitGuard</div>
@@ -202,6 +211,15 @@
               <div class="bento-canvas-wrap">
                 <canvas id="filingCanvas" aria-hidden="true"></canvas>
                 <div class="bento-canvas-fade"></div>
+                <!-- Glassmorphic UI overlay -->
+                <div class="bento-ui-overlay bento-ui-overlay--cyan" aria-hidden="true">
+                  <div class="bento-ui-row">
+                    <span class="bento-ui-dot bento-ui-dot--green"></span>
+                    <span class="bento-ui-text">Filing Scan Complete</span>
+                  </div>
+                  <div class="bento-ui-detail">4 of 5 passed</div>
+                  <div class="bento-ui-meta">1 defect flagged</div>
+                </div>
               </div>
               <div class="bento-content">
                 <div class="bento-badge bento-badge--cyan">Filing Review</div>
@@ -219,6 +237,15 @@
               <div class="bento-canvas-wrap">
                 <canvas id="costguardCanvas" aria-hidden="true"></canvas>
                 <div class="bento-canvas-fade"></div>
+                <!-- Glassmorphic UI overlay -->
+                <div class="bento-ui-overlay bento-ui-overlay--emerald" aria-hidden="true">
+                  <div class="bento-ui-row">
+                    <span class="bento-ui-dot bento-ui-dot--green"></span>
+                    <span class="bento-ui-text">Costs Compliance</span>
+                  </div>
+                  <div class="bento-ui-detail">$142,800 recoverable</div>
+                  <div class="bento-ui-meta">94% compliance rate</div>
+                </div>
               </div>
               <div class="bento-content">
                 <div class="bento-badge bento-badge--emerald">CostGuard</div>
@@ -356,7 +383,9 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <p class="eyebrow">Luris</p>
+          <a class="brand-link" href="index.html" style="margin-bottom: 0.75rem;">
+            <p class="eyebrow" style="margin: 0; color: #fff; font-weight: 700; font-size: 1.1rem;">Luris</p>
+          </a>
           <p>Purpose-built software for Australian legal professionals.</p>
         </div>
         <div class="footer-col">
