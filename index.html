@@ -10,7 +10,7 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="dark-body">
@@ -42,10 +42,13 @@
     <main class="page-wrapper">
 
       <!-- ═══════════════════════════════════════════════════════════
-           HERO
+           HERO: Full-viewport WebGL canvas + copy
       ═══════════════════════════════════════════════════════════ -->
       <section class="hero-section">
-        <div class="hero-gradient-bg" aria-hidden="true"></div>
+        <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+
+        <!-- Radial noise overlay for film grain -->
+        <div class="hero-grain" aria-hidden="true"></div>
 
         <div class="hero-inner">
           <div class="hero-copy">
@@ -56,15 +59,14 @@
               <span class="hero-gradient">In every matter.</span>
             </h1>
             <p class="hero-desc">
-              Stop limitation dates slipping through the cracks.
-              Catch filing defects before the registry does.
-              Keep every costs agreement audit-ready.
-              Purpose-built for Australian legal practice.
+              The automated compliance layer for Australian legal practice.
+              Eliminate missed deadlines, registry rejections, and
+              unrecovered costs — all from one secure workspace.
             </p>
             <div class="hero-actions">
               <a class="btn-primary-hero" href="contact.html">Request a Demo</a>
-              <a class="btn-ghost-hero" href="#how-it-works">
-                See How It Works
+              <a class="btn-ghost-hero" href="#products">
+                Explore Products
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -165,30 +167,7 @@
       </section>
 
       <!-- ═══════════════════════════════════════════════════════════
-           SOCIAL PROOF
-      ═══════════════════════════════════════════════════════════ -->
-      <section class="social-proof-section">
-        <div class="social-proof-inner">
-          <div class="beta-badge">
-            <span class="beta-dot"></span>
-            Currently in private beta with selected Australian firms
-          </div>
-          <p class="social-proof-text">Built in consultation with Australian legal practitioners across litigation, family law, commercial, property, and insurance practices.</p>
-          <div class="designed-for">
-            <span class="designed-for-label">Designed for</span>
-            <div class="practice-tags">
-              <span>Litigation</span>
-              <span>Family Law</span>
-              <span>Commercial</span>
-              <span>Property</span>
-              <span>Insurance</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ═══════════════════════════════════════════════════════════
-           PRODUCTS: Bento grid with feature cards
+           PRODUCTS: Bento grid with 3D feature cards
       ═══════════════════════════════════════════════════════════ -->
       <section id="products" class="products-section">
         <div class="products-inner">
@@ -201,22 +180,25 @@
           <!-- Bento grid -->
           <div class="bento-grid">
 
-            <!-- Card 1: LimitGuard -->
+            <!-- Card 1: LimitGuard — Rotating Architectural Calendar -->
             <article class="bento-card bento-card--lg bento-card--limitguard animate-on-scroll">
-              <div class="bento-visual bento-visual--amber">
+              <div class="bento-canvas-wrap">
+                <canvas id="limitguardCanvas" aria-hidden="true"></canvas>
+                <div class="bento-canvas-fade"></div>
+                <!-- Glassmorphic UI overlay -->
                 <div class="bento-ui-overlay bento-ui-overlay--amber" aria-hidden="true">
                   <div class="bento-ui-row">
                     <span class="bento-ui-dot bento-ui-dot--amber"></span>
                     <span class="bento-ui-text">Limitation Warning</span>
                   </div>
                   <div class="bento-ui-detail">Smith v Jones</div>
-                  <div class="bento-ui-meta">3 days remaining &middot; NSW Supreme Court</div>
+                  <div class="bento-ui-meta">3 days remaining</div>
                 </div>
               </div>
               <div class="bento-content">
                 <div class="bento-badge bento-badge--amber">LimitGuard</div>
                 <h3 class="bento-title">Never miss a limitation period</h3>
-                <p class="bento-desc">Missed a limitation date? That's a negligence claim. LimitGuard tracks every deadline across NSW, VIC, QLD, and ACT limitation periods — and alerts you before exposure becomes risk.</p>
+                <p class="bento-desc">Precision deadline tracking with multi-jurisdictional calendar intelligence. Rotating risk alerts ensure no exposure slips through.</p>
                 <a class="bento-link" href="limitguard.html">
                   Explore LimitGuard
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M8 3l3.5 4L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -224,9 +206,12 @@
               </div>
             </article>
 
-            <!-- Card 2: Filing Review -->
+            <!-- Card 2: Filing Review — Laser Plane Document Scan -->
             <article class="bento-card bento-card--filing animate-on-scroll" data-delay="1">
-              <div class="bento-visual bento-visual--cyan">
+              <div class="bento-canvas-wrap">
+                <canvas id="filingCanvas" aria-hidden="true"></canvas>
+                <div class="bento-canvas-fade"></div>
+                <!-- Glassmorphic UI overlay -->
                 <div class="bento-ui-overlay bento-ui-overlay--cyan" aria-hidden="true">
                   <div class="bento-ui-row">
                     <span class="bento-ui-dot bento-ui-dot--green"></span>
@@ -239,7 +224,7 @@
               <div class="bento-content">
                 <div class="bento-badge bento-badge--cyan">Filing Review</div>
                 <h3 class="bento-title">Eliminate registry rejections</h3>
-                <p class="bento-desc">Registry rejections waste days and damage client confidence. The Filing Checker reviews every document against court-specific procedural requirements before you lodge.</p>
+                <p class="bento-desc">AI-assisted laser scanning flags every procedural defect before submission reaches the registry.</p>
                 <a class="bento-link" href="court-filing-readiness-checker.html">
                   Explore Filing Checker
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M8 3l3.5 4L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -247,9 +232,12 @@
               </div>
             </article>
 
-            <!-- Card 3: CostGuard -->
+            <!-- Card 3: CostGuard — Grid-forming Geometries -->
             <article class="bento-card bento-card--lg bento-card--costguard animate-on-scroll" data-delay="2">
-              <div class="bento-visual bento-visual--emerald">
+              <div class="bento-canvas-wrap">
+                <canvas id="costguardCanvas" aria-hidden="true"></canvas>
+                <div class="bento-canvas-fade"></div>
+                <!-- Glassmorphic UI overlay -->
                 <div class="bento-ui-overlay bento-ui-overlay--emerald" aria-hidden="true">
                   <div class="bento-ui-row">
                     <span class="bento-ui-dot bento-ui-dot--green"></span>
@@ -262,7 +250,7 @@
               <div class="bento-content">
                 <div class="bento-badge bento-badge--emerald">CostGuard</div>
                 <h3 class="bento-title">Recover what you've earned</h3>
-                <p class="bento-desc">Unbilled time and non-compliant costs agreements leave money on the table. CostGuard audits your fee structures against the Legal Profession Uniform Law and flags recovery gaps.</p>
+                <p class="bento-desc">Costs agreement compliance engine that maps every fee into a recoverable, auditable grid — maximising recovery at every stage.</p>
                 <a class="bento-link" href="costguard.html">
                   Explore CostGuard
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M8 3l3.5 4L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -270,18 +258,8 @@
               </div>
             </article>
 
-          </div>
-        </div>
-      </section>
-
-      <!-- ═══════════════════════════════════════════════════════════
-           CROSSEXAM AI — Standalone product
-      ═══════════════════════════════════════════════════════════ -->
-      <section class="crossexam-section">
-        <div class="crossexam-inner animate-on-scroll">
-          <span class="section-eyebrow">Also from Luris</span>
-          <div class="crossexam-layout">
-            <div class="crossexam-copy">
+            <!-- Card 4: CrossExam AI — standalone product callout -->
+            <article class="bento-card bento-card--crossexam animate-on-scroll" data-delay="3">
               <div class="crossexam-icon" aria-hidden="true">
                 <svg viewBox="0 0 48 48" fill="none">
                   <circle cx="24" cy="24" r="20" stroke="rgba(99,102,241,0.3)" stroke-width="1"/>
@@ -289,14 +267,15 @@
                   <path d="M16 24l5 5 11-11" stroke="#6366F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <div class="bento-badge bento-badge--indigo" style="margin-bottom: 0.75rem;">CrossExam AI <span class="badge-chip">Standalone product</span></div>
-              <h2 class="crossexam-heading">Professional witness training for litigators</h2>
-              <p class="crossexam-desc">AI-powered cross-examination practice platform for solicitors and barristers preparing for trial. Available as a standalone product or as an add-on to Luris Platform Professional.</p>
+              <div class="bento-badge bento-badge--indigo" style="margin-bottom: 0.75rem;">CrossExam AI <span class="badge-chip">Sold separately</span></div>
+              <h3 class="bento-title">Professional witness training for litigators</h3>
+              <p class="bento-desc">AI-powered cross-examination practice platform for solicitors and barristers preparing for trial.</p>
               <a class="bento-link" href="crossexam-ai.html">
                 Explore CrossExam AI
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7h9M8 3l3.5 4L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
-            </div>
+            </article>
+
           </div>
         </div>
       </section>
@@ -304,7 +283,7 @@
       <!-- ═══════════════════════════════════════════════════════════
            HOW IT WORKS
       ═══════════════════════════════════════════════════════════ -->
-      <section id="how-it-works" class="hiw-section">
+      <section class="hiw-section">
         <div class="hiw-inner">
           <span class="section-eyebrow">How It Works</span>
           <h2 class="hiw-heading">From risk identification<br>to operational control</h2>
@@ -368,20 +347,19 @@
             <p class="platform-lead">Luris develops desktop-first and secure cloud-deployable software designed specifically for Australian legal professionals.</p>
             <blockquote class="privacy-callout">
               <p>Client information must remain controlled, compartmentalised, and auditable.</p>
-              <cite class="privacy-cite">&mdash; Australian Solicitors' Conduct Rules, Rule 9</cite>
             </blockquote>
           </div>
           <div class="privacy-features">
             <p class="feature-label">All Luris applications are engineered to support:</p>
             <ul class="feature-list">
-              <li>Australian onshore data hosting (Google Cloud Sydney &mdash; australia-southeast1)</li>
+              <li>Australian onshore data hosting (Sydney region)</li>
               <li>Australian Privacy Principles (Privacy Act 1988) security expectations</li>
-              <li>AES-256 encryption of all stored and transmitted information</li>
+              <li>Encryption of all stored and transmitted information</li>
               <li>Strict separation between different firms' data</li>
             </ul>
             <div class="infra-badge">
               <p class="feature-label" style="margin-top: 2rem;">Infrastructure</p>
-              <p class="compliance-note">Hosted on Google Cloud's Australian infrastructure (SOC 2 Type II certified), approved for government and regulated industry use. <a class="policy-link" href="https://cloud.google.com/security/compliance/hcf-australia" target="_blank" rel="noopener">Google Cloud HCF Australia &rarr;</a></p>
+              <p class="compliance-note">Hosted on Google Cloud's Australian infrastructure, certified for government and regulated industry use. <a class="policy-link" href="https://cloud.google.com/security/compliance/hcf-australia" target="_blank" rel="noopener">Google Cloud HCF Australia &rarr;</a></p>
             </div>
           </div>
         </div>
@@ -409,15 +387,13 @@
             <p class="eyebrow" style="margin: 0; color: #fff; font-weight: 700; font-size: 1.1rem;">Luris</p>
           </a>
           <p>Purpose-built software for Australian legal professionals.</p>
-          <p class="footer-location">Canberra, ACT, Australia</p>
-          <p class="footer-contact-email"><a href="mailto:hello@luris.com.au">hello@luris.com.au</a></p>
         </div>
         <div class="footer-col">
           <h4>Products</h4>
+          <a href="crossexam-ai.html">CrossExam AI</a>
           <a href="costguard.html">CostGuard</a>
           <a href="court-filing-readiness-checker.html">Filing Checker</a>
           <a href="limitguard.html">LimitGuard</a>
-          <a href="crossexam-ai.html">CrossExam AI</a>
         </div>
         <div class="footer-col">
           <h4>Legal</h4>
@@ -431,10 +407,12 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Luris Pty Ltd &middot; ABN pending</p>
+        <p>&copy; 2026 Luris Pty Ltd</p>
       </div>
     </footer>
 
+    <!-- Three.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
     <script src="main.js" defer></script>
   </body>
 </html>
