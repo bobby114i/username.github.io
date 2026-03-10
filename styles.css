@@ -2468,10 +2468,10 @@ body.dark-body {
 /* ── How It Works ───────────────────────────────────────── */
 
 .hiw-section {
-  background: #FFFFFF;
+  background: #0E0E16;
   padding: 7rem 2rem;
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .hiw-inner {
@@ -2483,7 +2483,7 @@ body.dark-body {
   font-size: clamp(1.75rem, 3vw, 2.75rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: #0F172A;
+  color: #F8FAFC;
   line-height: 1.1;
   margin: 1rem 0 4rem;
   max-width: 24ch;
@@ -2494,18 +2494,6 @@ body.dark-body {
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
   position: relative;
-}
-
-/* Connecting line between steps */
-.hiw-steps::before {
-  content: '';
-  position: absolute;
-  top: 3.7rem;
-  left: calc(100% / 6);
-  right: calc(100% / 6);
-  height: 1px;
-  background: linear-gradient(90deg, rgba(94,106,210,0.6) 0%, rgba(0,210,255,0.4) 50%, rgba(94,106,210,0.6) 100%);
-  z-index: 0;
 }
 
 .hiw-step {
@@ -2538,14 +2526,14 @@ body.dark-body {
 .hiw-step h3 {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #0F172A;
+  color: #F8FAFC;
   letter-spacing: -0.02em;
   margin: 0 0 0.75rem;
 }
 
 .hiw-step p {
   font-size: 0.9375rem;
-  color: #475569;
+  color: #CBD5E1;
   line-height: 1.65;
   margin: 0;
 }
