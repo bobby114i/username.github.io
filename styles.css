@@ -2148,7 +2148,7 @@ body.dark-body {
 /* ── Products / Bento Grid Section ─────────────────────── */
 
 .products-section {
-  background: #0B0B0F;
+  background: #FFFFFF;
   padding: 7rem 2rem;
 }
 
@@ -2180,15 +2180,19 @@ body.dark-body {
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
-  color: #FFFFFF;
+  color: #121824;
   margin: 0 0 1rem;
 }
 
 .products-subhead {
   font-size: 1.0625rem;
-  color: #5A5A80;
+  color: #4B5566;
   margin: 0;
   line-height: 1.6;
+}
+
+.products-section .bento-card {
+  background: #10131A;
 }
 
 /* Bento grid layout */
