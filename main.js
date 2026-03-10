@@ -134,7 +134,7 @@
     var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 200);
     camera.position.z = 7;
 
-    var COUNT = window.innerWidth < 600 ? 800 : 1600;
+    var COUNT = window.innerWidth < 600 ? 520 : 1100;
 
     /* Build two position arrays: chaos and order */
     var chaosPos = new Float32Array(COUNT * 3);
@@ -179,10 +179,10 @@
     ptGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     var ptMat = new THREE.PointsMaterial({
-      size: 0.045,
+      size: 0.04,
       vertexColors: true,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.62,
       sizeAttenuation: true,
     });
     var points = new THREE.Points(ptGeo, ptMat);
@@ -212,7 +212,7 @@
     var hold      = false;
     var holdFrames = 0;
     var HOLD_ORDER = 150; /* frames at full order */
-    var HOLD_CHAOS = 80;  /* frames at full chaos */
+    var HOLD_CHAOS = 45;  /* frames at full chaos */
 
     function resize() {
       var w = canvas.clientWidth;
@@ -256,10 +256,13 @@
       ptGeo.attributes.position.needsUpdate = true;
 
       /* Wireframe fades in as order grows */
-      wireMat.opacity = ep * 0.18;
+      wireMat.opacity = ep * 0.14;
+
+      /* Keep initial state calmer before the sphere coheres */
+      ptMat.opacity = 0.42 + ep * 0.2;
 
       /* Slow rotation + mouse parallax */
-      var rotY = performance.now() * 0.00015 + mouseX * 0.08;
+      var rotY = performance.now() * 0.00011 + mouseX * 0.08;
       var rotX = mouseY * -0.04;
       points.rotation.y   = rotY;
       points.rotation.x   = rotX;
