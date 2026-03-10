@@ -273,8 +273,8 @@
 
   /* ═══════════════════════════════════════════════════════════
      LIMITGUARD CANVAS
-     Rotating Architectural Calendar — nested armillary rings
-     with date/tick markers floating around them
+     Particle network forming concentric orbital rings
+     (unified dot-and-line visual language)
   ═══════════════════════════════════════════════════════════ */
   function initLimitGuardScene() {
     var canvas = document.getElementById('limitguardCanvas');
@@ -287,121 +287,114 @@
     var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 200);
     camera.position.z = 5;
 
-    /* Ambient + directional light for subtle shading */
-    scene.add(new THREE.AmbientLight(0x1a1a2e, 1));
-    var dirLight = new THREE.DirectionalLight(0xFBBF24, 0.8);
-    dirLight.position.set(2, 3, 4);
-    scene.add(dirLight);
-
-    /* ── Build concentric rotating rings (armillary sphere) ── */
-    var ringGroup = new THREE.Group();
-    scene.add(ringGroup);
-
     var AMBER = 0xFBBF24;
-    var AMBER_DIM = 0x7A5F00;
+    var COUNT = window.innerWidth < 600 ? 500 : 900;
 
-    var ringConfigs = [
-      { r: 2.2, tube: 0.018, tilt: 0,    speed: 0.004  },
-      { r: 2.2, tube: 0.015, tilt: 90,   speed: -0.006 },
-      { r: 2.2, tube: 0.012, tilt: 45,   speed: 0.008  },
-      { r: 1.6, tube: 0.018, tilt: 20,   speed: -0.005 },
-      { r: 1.6, tube: 0.015, tilt: 70,   speed: 0.007  },
-      { r: 1.0, tube: 0.02,  tilt: 0,    speed: 0.012  },
-    ];
+    /* Build chaos and order positions */
+    var chaosPos = new Float32Array(COUNT * 3);
+    var orderPos = new Float32Array(COUNT * 3);
 
-    var rings = ringConfigs.map(function (cfg) {
-      var geo  = new THREE.TorusGeometry(cfg.r, cfg.tube, 8, 120);
-      var mat  = new THREE.MeshBasicMaterial({
-        color: AMBER,
-        transparent: true,
-        opacity: 0.55,
-      });
-      var mesh = new THREE.Mesh(geo, mat);
-      mesh.rotation.x = cfg.tilt * (Math.PI / 180);
-      mesh.userData.speed = cfg.speed;
-      mesh.userData.initTiltX = mesh.rotation.x;
-      ringGroup.add(mesh);
-      return mesh;
-    });
-
-    /* ── Tick marks on the outermost ring ────────────────── */
-    var tickGroup = new THREE.Group();
-    ringGroup.add(tickGroup);
-
-    for (var m = 0; m < 24; m++) {
-      var angle  = (m / 24) * Math.PI * 2;
-      var isMain = m % 6 === 0;
-      var len    = isMain ? 0.18 : 0.08;
-      var r      = 2.2;
-
-      var pts = [
-        new THREE.Vector3(
-          Math.cos(angle) * r,
-          Math.sin(angle) * r,
-          0
-        ),
-        new THREE.Vector3(
-          Math.cos(angle) * (r + len),
-          Math.sin(angle) * (r + len),
-          0
-        ),
-      ];
-
-      var tickGeo = new THREE.BufferGeometry().setFromPoints(pts);
-      var tickMat = new THREE.LineBasicMaterial({
-        color: isMain ? AMBER : AMBER_DIM,
-        transparent: true,
-        opacity: isMain ? 0.9 : 0.4,
-      });
-      tickGroup.add(new THREE.Line(tickGeo, tickMat));
+    /* Chaos: scattered ellipse */
+    for (var i = 0; i < COUNT; i++) {
+      var theta = Math.random() * Math.PI * 2;
+      var phi   = Math.acos(2 * Math.random() - 1);
+      var r     = 3 + Math.random() * 6;
+      chaosPos[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
+      chaosPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.6;
+      chaosPos[i * 3 + 2] = r * Math.cos(phi) * 0.4;
     }
 
-    /* ── Central glowing sphere ─────────────────────────── */
-    var sphereGeo = new THREE.SphereGeometry(0.15, 24, 24);
+    /* Order: concentric rings of dots (armillary-like) */
+    var ringRadii = [2.2, 2.2, 1.6, 1.6, 1.0];
+    var ringTilts = [0, Math.PI/2, Math.PI/4, Math.PI*0.35, Math.PI*0.15];
+    for (var j = 0; j < COUNT; j++) {
+      var ringIdx = j % ringRadii.length;
+      var rr = ringRadii[ringIdx];
+      var a = (j / (COUNT / ringRadii.length)) * Math.PI * 2 + Math.random() * 0.3;
+      var tilt = ringTilts[ringIdx];
+      var x = Math.cos(a) * rr;
+      var y = Math.sin(a) * rr;
+      /* Rotate by tilt around X axis */
+      var ry = y * Math.cos(tilt);
+      var rz = y * Math.sin(tilt);
+      orderPos[j * 3]     = x + (Math.random() - 0.5) * 0.1;
+      orderPos[j * 3 + 1] = ry + (Math.random() - 0.5) * 0.1;
+      orderPos[j * 3 + 2] = rz + (Math.random() - 0.5) * 0.1;
+    }
+
+    /* Particle system */
+    var currentPos = new Float32Array(chaosPos);
+    var ptGeo = new THREE.BufferGeometry();
+    ptGeo.setAttribute('position', new THREE.BufferAttribute(currentPos, 3));
+
+    /* Amber-toned colors with variation */
+    var colors = new Float32Array(COUNT * 3);
+    for (var k = 0; k < COUNT; k++) {
+      var t = Math.random();
+      colors[k * 3]     = 0.98 * (1 - t * 0.2);
+      colors[k * 3 + 1] = 0.75 * (1 - t * 0.3);
+      colors[k * 3 + 2] = 0.14 * (1 + t * 0.5);
+    }
+    ptGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    var ptMat = new THREE.PointsMaterial({
+      size: 0.05,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8,
+      sizeAttenuation: true,
+    });
+    var points = new THREE.Points(ptGeo, ptMat);
+    scene.add(points);
+
+    /* Wireframe torus ring that fades in with order */
+    var wireGeo = new THREE.TorusGeometry(2.2, 0.01, 8, 80);
+    var wireMat = new THREE.MeshBasicMaterial({
+      color: AMBER,
+      wireframe: true,
+      transparent: true,
+      opacity: 0,
+    });
+    var wireMesh = new THREE.Mesh(wireGeo, wireMat);
+    scene.add(wireMesh);
+
+    /* Second ring at different tilt */
+    var wireGeo2 = new THREE.TorusGeometry(1.6, 0.01, 8, 60);
+    var wireMat2 = new THREE.MeshBasicMaterial({
+      color: AMBER,
+      wireframe: true,
+      transparent: true,
+      opacity: 0,
+    });
+    var wireMesh2 = new THREE.Mesh(wireGeo2, wireMat2);
+    wireMesh2.rotation.x = Math.PI / 2;
+    scene.add(wireMesh2);
+
+    /* Central glow */
+    var sphereGeo = new THREE.SphereGeometry(0.12, 16, 16);
     var sphereMat = new THREE.MeshBasicMaterial({
       color: AMBER,
       transparent: true,
       opacity: 0.9,
     });
     var sphere = new THREE.Mesh(sphereGeo, sphereMat);
-    ringGroup.add(sphere);
+    scene.add(sphere);
 
-    /* Glow halo around sphere */
-    var glowGeo = new THREE.SphereGeometry(0.35, 24, 24);
+    var glowGeo = new THREE.SphereGeometry(0.3, 16, 16);
     var glowMat = new THREE.MeshBasicMaterial({
       color: AMBER,
       transparent: true,
-      opacity: 0.07,
+      opacity: 0.08,
       side: THREE.BackSide,
     });
-    ringGroup.add(new THREE.Mesh(glowGeo, glowMat));
+    scene.add(new THREE.Mesh(glowGeo, glowMat));
 
-    /* ── Particle dots orbiting the structure ─────────────── */
-    var orbitCount = 60;
-    var orbitGeo   = new THREE.BufferGeometry();
-    var orbitPos   = new Float32Array(orbitCount * 3);
-    var orbitData  = [];
+    /* Animation state */
+    var progress  = 0;
+    var direction = 1;
+    var hold      = false;
+    var holdFrames = 0;
 
-    for (var n = 0; n < orbitCount; n++) {
-      var oa   = Math.random() * Math.PI * 2;
-      var or   = 2.0 + Math.random() * 0.8;
-      var oInc = (Math.random() - 0.5) * Math.PI;
-      orbitData.push({ angle: oa, radius: or, inclination: oInc, speed: (Math.random() - 0.5) * 0.015 });
-      orbitPos[n * 3]     = 0;
-      orbitPos[n * 3 + 1] = 0;
-      orbitPos[n * 3 + 2] = 0;
-    }
-
-    orbitGeo.setAttribute('position', new THREE.BufferAttribute(orbitPos, 3));
-    var orbitMat = new THREE.PointsMaterial({
-      color: AMBER,
-      size: 0.06,
-      transparent: true,
-      opacity: 0.6,
-    });
-    ringGroup.add(new THREE.Points(orbitGeo, orbitMat));
-
-    /* Resize */
     function resize() {
       var w = canvas.clientWidth, h = canvas.clientHeight;
       renderer.setSize(w, h, false);
@@ -411,37 +404,43 @@
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    var t0 = performance.now();
-
     function tick() {
       requestAnimationFrame(tick);
       var t = performance.now() * 0.001;
 
-      /* Rotate each ring on its own axis */
-      rings.forEach(function (ring) {
-        ring.rotation.z += ring.userData.speed;
-      });
+      if (!hold) {
+        progress += 0.003 * direction;
+        if (progress >= 1) { progress = 1; hold = true; holdFrames = 150; direction = -1; }
+        else if (progress <= 0) { progress = 0; hold = true; holdFrames = 80; direction = 1; }
+      } else {
+        holdFrames--;
+        if (holdFrames <= 0) hold = false;
+      }
 
-      /* Tick group follows outermost ring's y-rotation */
-      tickGroup.rotation.z += 0.004;
+      var ep = easeInOutCubic(Math.max(0, Math.min(1, progress)));
 
-      /* Slow overall yaw of the whole armillary */
-      ringGroup.rotation.y = t * 0.12;
-      ringGroup.rotation.x = Math.sin(t * 0.3) * 0.12;
+      /* Interpolate positions */
+      var pos = ptGeo.attributes.position.array;
+      for (var idx = 0; idx < COUNT * 3; idx++) {
+        pos[idx] = chaosPos[idx] + (orderPos[idx] - chaosPos[idx]) * ep;
+      }
+      ptGeo.attributes.position.needsUpdate = true;
 
-      /* Update orbit particles */
-      var op = orbitGeo.attributes.position.array;
-      orbitData.forEach(function (od, i) {
-        od.angle += od.speed;
-        op[i * 3]     = Math.cos(od.angle) * od.radius;
-        op[i * 3 + 1] = Math.sin(od.angle) * od.radius * Math.cos(od.inclination);
-        op[i * 3 + 2] = Math.sin(od.angle) * od.radius * Math.sin(od.inclination);
-      });
-      orbitGeo.attributes.position.needsUpdate = true;
+      /* Wireframes fade in */
+      wireMat.opacity = ep * 0.15;
+      wireMat2.opacity = ep * 0.12;
 
-      /* Subtle sphere pulse */
-      var pulse = 0.9 + Math.sin(t * 2.5) * 0.1;
-      sphere.scale.setScalar(pulse);
+      /* Slow rotation */
+      var rotY = t * 0.12;
+      var rotX = Math.sin(t * 0.3) * 0.12;
+      points.rotation.y = rotY;
+      points.rotation.x = rotX;
+      wireMesh.rotation.y = rotY;
+      wireMesh2.rotation.y = rotY;
+      wireMesh2.rotation.x = Math.PI / 2 + rotX;
+
+      /* Sphere pulse */
+      sphere.scale.setScalar(0.9 + Math.sin(t * 2.5) * 0.1);
 
       renderer.render(scene, camera);
     }
@@ -450,8 +449,8 @@
 
   /* ═══════════════════════════════════════════════════════════
      FILING REVIEW CANVAS
-     Laser Plane Document Scan — stack of document slabs
-     swept by a bright horizontal laser plane
+     Particle document scan — stacked particle planes swept
+     by a bright laser line (unified dot-and-line language)
   ═══════════════════════════════════════════════════════════ */
   function initFilingScene() {
     var canvas = document.getElementById('filingCanvas');
@@ -465,97 +464,116 @@
     camera.position.set(1.5, 1, 4.5);
     camera.lookAt(0, 0, 0);
 
-    /* ── Stack of document slabs ─────────────────────────── */
-    var DOC_COUNT = 7;
-    var docGroup  = new THREE.Group();
-    scene.add(docGroup);
-
     var CYAN = 0x00D2FF;
-    var docSlabs = [];
+    var GREEN = 0x34D399;
+    var RED = 0xF87171;
+    var DOC_COUNT = 7;
+
+    var mainGroup = new THREE.Group();
+    scene.add(mainGroup);
+
+    /* Build document layers from particles on flat planes */
+    var DOC_PARTICLES_PER = 80;
+    var TOTAL = DOC_PARTICLES_PER * DOC_COUNT;
+    var docPosArr = new Float32Array(TOTAL * 3);
+    var docColArr = new Float32Array(TOTAL * 3);
+    var docSlabY = [];
 
     for (var d = 0; d < DOC_COUNT; d++) {
-      var frac   = d / (DOC_COUNT - 1);
-      var yPos   = -1.4 + frac * 2.8;
-      var width  = 1.6 - Math.random() * 0.2;
-      var height = 0.06;
-      var depth  = 2.0 - Math.random() * 0.3;
+      var yPos = -1.4 + (d / (DOC_COUNT - 1)) * 2.8;
+      docSlabY.push(yPos);
+      for (var p = 0; p < DOC_PARTICLES_PER; p++) {
+        var idx = (d * DOC_PARTICLES_PER + p) * 3;
+        docPosArr[idx]     = (Math.random() - 0.5) * 1.6;
+        docPosArr[idx + 1] = yPos + (Math.random() - 0.5) * 0.02;
+        docPosArr[idx + 2] = (Math.random() - 0.5) * 2.0;
+        /* Base color: muted blue-grey */
+        docColArr[idx]     = 0.12;
+        docColArr[idx + 1] = 0.12;
+        docColArr[idx + 2] = 0.25;
+      }
+    }
 
-      var geo = new THREE.BoxGeometry(width, height, depth);
-      var mat = new THREE.MeshBasicMaterial({
-        color: 0x1a1a30,
-        transparent: true,
-        opacity: 0.8,
-      });
-      var mesh = new THREE.Mesh(geo, mat);
-      mesh.position.y = yPos;
-      mesh.position.x = (Math.random() - 0.5) * 0.1;
-      mesh.position.z = (Math.random() - 0.5) * 0.1;
-      docGroup.add(mesh);
+    var docGeo = new THREE.BufferGeometry();
+    docGeo.setAttribute('position', new THREE.BufferAttribute(docPosArr, 3));
+    docGeo.setAttribute('color', new THREE.BufferAttribute(docColArr, 3));
 
-      /* Edge wireframe for each slab */
-      var edgeGeo = new THREE.EdgesGeometry(geo);
+    var docMat = new THREE.PointsMaterial({
+      size: 0.045,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8,
+      sizeAttenuation: true,
+    });
+    var docPoints = new THREE.Points(docGeo, docMat);
+    mainGroup.add(docPoints);
+
+    /* Subtle wireframe edges for each document layer */
+    for (var dw = 0; dw < DOC_COUNT; dw++) {
+      var edgeGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(1.6, 0.01, 2.0));
       var edgeMat = new THREE.LineBasicMaterial({
         color: 0x2a2a50,
         transparent: true,
-        opacity: 0.6,
+        opacity: 0.2,
       });
-      var edges = new THREE.LineSegments(edgeGeo, edgeMat);
-      mesh.add(edges);
-
-      docSlabs.push({ mesh: mesh, edges: edges, edgeMat: edgeMat, yPos: yPos, scanned: false });
+      var edgeMesh = new THREE.LineSegments(edgeGeo, edgeMat);
+      edgeMesh.position.y = docSlabY[dw];
+      mainGroup.add(edgeMesh);
     }
 
-    /* ── Laser plane (thin horizontal box) ───────────────── */
-    var laserGeo  = new THREE.PlaneGeometry(2.2, 0.015);
-    var laserMat  = new THREE.MeshBasicMaterial({
+    /* Laser sweep line made of particles */
+    var LASER_PTS = 40;
+    var laserGeo = new THREE.BufferGeometry();
+    var laserPos = new Float32Array(LASER_PTS * 3);
+    for (var lp = 0; lp < LASER_PTS; lp++) {
+      laserPos[lp * 3]     = (lp / (LASER_PTS - 1) - 0.5) * 2.2;
+      laserPos[lp * 3 + 1] = 0;
+      laserPos[lp * 3 + 2] = 0;
+    }
+    laserGeo.setAttribute('position', new THREE.BufferAttribute(laserPos, 3));
+    var laserMat = new THREE.PointsMaterial({
       color: CYAN,
+      size: 0.06,
       transparent: true,
       opacity: 0.9,
-      side: THREE.DoubleSide,
+      sizeAttenuation: true,
     });
-    var laser = new THREE.Mesh(laserGeo, laserMat);
-    laser.rotation.x = -Math.PI / 2;
-    scene.add(laser);
+    var laserPoints = new THREE.Points(laserGeo, laserMat);
+    mainGroup.add(laserPoints);
 
-    /* Wider glow plane behind laser */
-    var laserGlowGeo = new THREE.PlaneGeometry(2.4, 0.4);
-    var laserGlowMat = new THREE.MeshBasicMaterial({
+    /* Laser glow line */
+    var laserLineGeo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-1.1, 0, 0),
+      new THREE.Vector3(1.1, 0, 0),
+    ]);
+    var laserLineMat = new THREE.LineBasicMaterial({
       color: CYAN,
       transparent: true,
-      opacity: 0.07,
-      side: THREE.DoubleSide,
+      opacity: 0.5,
     });
-    var laserGlow = new THREE.Mesh(laserGlowGeo, laserGlowMat);
-    laserGlow.rotation.x = -Math.PI / 2;
-    scene.add(laserGlow);
+    var laserLine = new THREE.Line(laserLineGeo, laserLineMat);
+    mainGroup.add(laserLine);
 
-    /* ── Scan result dots (appear after laser passes) ─────── */
-    var dotGroup = new THREE.Group();
-    scene.add(dotGroup);
-
-    var scanDots = [];
-    docSlabs.forEach(function (slab) {
-      var dotGeo = new THREE.SphereGeometry(0.04, 8, 8);
-      var dotMat = new THREE.MeshBasicMaterial({ color: CYAN, transparent: true, opacity: 0 });
-      var dot    = new THREE.Mesh(dotGeo, dotMat);
-      dot.position.set(-0.6, slab.yPos + 0.06, 0.7);
-      dotGroup.add(dot);
-
-      var checkGeo = new THREE.SphereGeometry(0.035, 8, 8);
-      var checkMat = new THREE.MeshBasicMaterial({ color: 0x34D399, transparent: true, opacity: 0 });
-      var check    = new THREE.Mesh(checkGeo, checkMat);
-      check.position.set(0.5, slab.yPos + 0.06, 0.7);
-      dotGroup.add(check);
-
-      scanDots.push({ alertDot: dot, alertMat: dotMat, okDot: check, okMat: checkMat, triggered: false });
-    });
-
-    /* ── Animation state ─────────────────────────────────── */
+    /* Animation state */
     var LASER_MIN = -1.7;
     var LASER_MAX = 1.7;
     var laserY    = LASER_MIN;
     var laserDir  = 1;
     var LASER_SPEED = 0.022;
+    var scannedState = [];
+    for (var si = 0; si < DOC_COUNT; si++) scannedState.push(false);
+
+    function resetScan() {
+      for (var ri = 0; ri < DOC_COUNT; ri++) scannedState[ri] = false;
+      /* Reset colors to base */
+      var cols = docGeo.attributes.color.array;
+      for (var ci = 0; ci < TOTAL; ci++) {
+        cols[ci * 3]     = 0.12;
+        cols[ci * 3 + 1] = 0.12;
+        cols[ci * 3 + 2] = 0.25;
+      }
+      docGeo.attributes.color.needsUpdate = true;
+    }
 
     function resize() {
       var w = canvas.clientWidth, h = canvas.clientHeight;
@@ -570,60 +588,35 @@
       requestAnimationFrame(tick);
       var t = performance.now() * 0.001;
 
-      /* Move laser */
       laserY += LASER_SPEED * laserDir;
-      if (laserY > LASER_MAX) {
-        laserDir = -1;
-        /* Reset all scan dots on reversal */
-        scanDots.forEach(function (sd) {
-          sd.alertMat.opacity = 0;
-          sd.okMat.opacity    = 0;
-          sd.triggered        = false;
-        });
-        docSlabs.forEach(function (slab) {
-          slab.edgeMat.color.setHex(0x2a2a50);
-          slab.edgeMat.opacity = 0.6;
-        });
-      }
-      if (laserY < LASER_MIN) {
-        laserDir = 1;
-        scanDots.forEach(function (sd) {
-          sd.alertMat.opacity = 0;
-          sd.okMat.opacity    = 0;
-          sd.triggered        = false;
-        });
-        docSlabs.forEach(function (slab) {
-          slab.edgeMat.color.setHex(0x2a2a50);
-          slab.edgeMat.opacity = 0.6;
-        });
-      }
+      if (laserY > LASER_MAX) { laserDir = -1; resetScan(); }
+      if (laserY < LASER_MIN) { laserDir = 1; resetScan(); }
 
-      laser.position.y     = laserY;
-      laserGlow.position.y = laserY;
+      laserPoints.position.y = laserY;
+      laserLine.position.y   = laserY;
+      laserMat.opacity = 0.7 + Math.sin(t * 8) * 0.2;
 
-      /* Laser pulse opacity */
-      laserMat.opacity = 0.7 + Math.sin(t * 8) * 0.15;
-
-      /* Trigger scan results as laser passes each slab */
-      docSlabs.forEach(function (slab, i) {
-        if (!scanDots[i].triggered && Math.abs(laserY - slab.yPos) < 0.15) {
-          scanDots[i].triggered = true;
-          /* 2/7 chance of alert (red), rest ok (green) */
-          if (i % 4 === 1 || i % 7 === 3) {
-            scanDots[i].alertMat.opacity = 0.9;
-            slab.edgeMat.color.setHex(0xF87171);
-            slab.edgeMat.opacity = 0.9;
-          } else {
-            scanDots[i].okMat.opacity = 0.9;
-            slab.edgeMat.color.setHex(0x34D399);
-            slab.edgeMat.opacity = 0.8;
+      /* Colour document particles when laser passes */
+      var cols = docGeo.attributes.color.array;
+      for (var di = 0; di < DOC_COUNT; di++) {
+        if (!scannedState[di] && Math.abs(laserY - docSlabY[di]) < 0.15) {
+          scannedState[di] = true;
+          var isDefect = (di % 4 === 1 || di % 7 === 3);
+          var startIdx = di * DOC_PARTICLES_PER;
+          for (var pi = 0; pi < DOC_PARTICLES_PER; pi++) {
+            var ci = (startIdx + pi) * 3;
+            if (isDefect) {
+              cols[ci] = 0.97; cols[ci+1] = 0.50; cols[ci+2] = 0.44;
+            } else {
+              cols[ci] = 0.20; cols[ci+1] = 0.82; cols[ci+2] = 0.60;
+            }
           }
+          docGeo.attributes.color.needsUpdate = true;
         }
-      });
+      }
 
-      /* Gentle rotation of document group */
-      docGroup.rotation.y = Math.sin(t * 0.3) * 0.15;
-      dotGroup.rotation.y = docGroup.rotation.y;
+      /* Gentle rotation */
+      mainGroup.rotation.y = Math.sin(t * 0.3) * 0.15;
 
       renderer.render(scene, camera);
     }
@@ -632,8 +625,8 @@
 
   /* ═══════════════════════════════════════════════════════════
      COSTGUARD CANVAS
-     Grid-forming Geometries — particles coalesce into a
-     precise 3D lattice, with value nodes glowing on intersections
+     Particle network forming a precise 3D lattice grid
+     (unified dot-and-line visual language)
   ═══════════════════════════════════════════════════════════ */
   function initCostGuardScene() {
     var canvas = document.getElementById('costguardCanvas');
@@ -650,13 +643,15 @@
     var EMERALD = 0x34D399;
     var EMERALD_DIM = 0x0D5C38;
 
-    /* ── Build a 5×5×2 grid of nodes ────────────────────── */
+    /* Grid nodes + ambient particles for richer look */
     var COLS = 6, ROWS = 4, LAYERS = 2;
     var nodeCount = COLS * ROWS * LAYERS;
+    var AMBIENT = 120; /* extra ambient particles */
+    var TOTAL = nodeCount + AMBIENT;
 
-    /* Target (ordered) positions — perfect grid */
-    var gridPos   = new Float32Array(nodeCount * 3);
-    var chaosPos2 = new Float32Array(nodeCount * 3);
+    var gridPos   = new Float32Array(TOTAL * 3);
+    var chaosPos2 = new Float32Array(TOTAL * 3);
+    var colors    = new Float32Array(TOTAL * 3);
 
     var spacing = 0.75;
     var idx = 0;
@@ -670,24 +665,44 @@
           gridPos[idx * 3]     = gx;
           gridPos[idx * 3 + 1] = gy;
           gridPos[idx * 3 + 2] = gz;
-
-          /* Chaos: random scatter around the grid area */
           chaosPos2[idx * 3]     = gx + (Math.random() - 0.5) * 6;
           chaosPos2[idx * 3 + 1] = gy + (Math.random() - 0.5) * 5;
           chaosPos2[idx * 3 + 2] = gz + (Math.random() - 0.5) * 4;
+          /* Emerald vertex colors with variation */
+          var tv = Math.random();
+          colors[idx * 3]     = 0.20 + tv * 0.1;
+          colors[idx * 3 + 1] = 0.82 - tv * 0.1;
+          colors[idx * 3 + 2] = 0.60 - tv * 0.1;
           idx++;
         }
       }
     }
 
-    /* Node particles */
+    /* Ambient floating particles that orbit loosely */
+    for (var ai = 0; ai < AMBIENT; ai++) {
+      var theta = Math.random() * Math.PI * 2;
+      var phi = Math.acos(2 * Math.random() - 1);
+      var ar = 2 + Math.random() * 3;
+      gridPos[idx * 3]     = ar * Math.sin(phi) * Math.cos(theta) * 0.6;
+      gridPos[idx * 3 + 1] = ar * Math.sin(phi) * Math.sin(theta) * 0.5;
+      gridPos[idx * 3 + 2] = ar * Math.cos(phi) * 0.4;
+      chaosPos2[idx * 3]     = (Math.random() - 0.5) * 8;
+      chaosPos2[idx * 3 + 1] = (Math.random() - 0.5) * 6;
+      chaosPos2[idx * 3 + 2] = (Math.random() - 0.5) * 5;
+      colors[idx * 3]     = 0.05;
+      colors[idx * 3 + 1] = 0.36;
+      colors[idx * 3 + 2] = 0.22;
+      idx++;
+    }
+
     var currentPos2 = new Float32Array(chaosPos2);
     var nodeGeo     = new THREE.BufferGeometry();
     nodeGeo.setAttribute('position', new THREE.BufferAttribute(currentPos2, 3));
+    nodeGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     var nodeMat = new THREE.PointsMaterial({
-      color: EMERALD,
-      size: 0.1,
+      size: 0.06,
+      vertexColors: true,
       transparent: true,
       opacity: 0.9,
       sizeAttenuation: true,
@@ -695,16 +710,12 @@
     var nodePoints = new THREE.Points(nodeGeo, nodeMat);
     scene.add(nodePoints);
 
-    /* ── Grid connection lines (horizontal + vertical) ─────── */
+    /* Grid connection lines */
     var lineGroup = new THREE.Group();
     scene.add(lineGroup);
-
-    /* We'll draw lines dynamically based on formation progress */
     var lineSegs = [];
 
-    /* Pre-build line segment objects (hidden initially) */
     function buildLines() {
-      /* Horizontal lines along columns for each row/layer */
       for (var l = 0; l < LAYERS; l++) {
         for (var r = 0; r < ROWS; r++) {
           for (var c = 0; c < COLS - 1; c++) {
@@ -715,18 +726,12 @@
               new THREE.Vector3(gridPos[i2*3], gridPos[i2*3+1], gridPos[i2*3+2]),
             ];
             var lg = new THREE.BufferGeometry().setFromPoints(pts);
-            var lm = new THREE.LineBasicMaterial({
-              color: EMERALD_DIM,
-              transparent: true,
-              opacity: 0,
-            });
-            var line = new THREE.Line(lg, lm);
-            lineGroup.add(line);
+            var lm = new THREE.LineBasicMaterial({ color: EMERALD_DIM, transparent: true, opacity: 0 });
+            lineGroup.add(new THREE.Line(lg, lm));
             lineSegs.push(lm);
           }
         }
       }
-      /* Vertical lines */
       for (var l2 = 0; l2 < LAYERS; l2++) {
         for (var r2 = 0; r2 < ROWS - 1; r2++) {
           for (var c2 = 0; c2 < COLS; c2++) {
@@ -737,13 +742,8 @@
               new THREE.Vector3(gridPos[i4*3], gridPos[i4*3+1], gridPos[i4*3+2]),
             ];
             var lg2 = new THREE.BufferGeometry().setFromPoints(pts2);
-            var lm2 = new THREE.LineBasicMaterial({
-              color: EMERALD_DIM,
-              transparent: true,
-              opacity: 0,
-            });
-            var line2 = new THREE.Line(lg2, lm2);
-            lineGroup.add(line2);
+            var lm2 = new THREE.LineBasicMaterial({ color: EMERALD_DIM, transparent: true, opacity: 0 });
+            lineGroup.add(new THREE.Line(lg2, lm2));
             lineSegs.push(lm2);
           }
         }
@@ -751,15 +751,12 @@
     }
     buildLines();
 
-    /* ── Animation state ─────────────────────────────────── */
+    /* Animation state */
     var progress2  = 0;
     var direction2 = 1;
     var hold2      = false;
     var holdF2     = 0;
-    var HOLD_GRID  = 180;
-    var HOLD_CHAOS2 = 60;
 
-    /* Resize */
     function resize() {
       var w = canvas.clientWidth, h = canvas.clientHeight;
       renderer.setSize(w, h, false);
@@ -773,14 +770,10 @@
       requestAnimationFrame(tick);
       var t = performance.now() * 0.001;
 
-      /* Advance */
       if (!hold2) {
         progress2 += 0.004 * direction2;
-        if (progress2 >= 1) {
-          progress2 = 1; hold2 = true; holdF2 = HOLD_GRID; direction2 = -1;
-        } else if (progress2 <= 0) {
-          progress2 = 0; hold2 = true; holdF2 = HOLD_CHAOS2; direction2 = 1;
-        }
+        if (progress2 >= 1) { progress2 = 1; hold2 = true; holdF2 = 180; direction2 = -1; }
+        else if (progress2 <= 0) { progress2 = 0; hold2 = true; holdF2 = 60; direction2 = 1; }
       } else {
         holdF2--;
         if (holdF2 <= 0) hold2 = false;
@@ -788,23 +781,18 @@
 
       var ep = easeInOutCubic(Math.max(0, Math.min(1, progress2)));
 
-      /* Interpolate node positions */
       var pos2 = nodeGeo.attributes.position.array;
-      for (var ni = 0; ni < nodeCount * 3; ni++) {
+      for (var ni = 0; ni < TOTAL * 3; ni++) {
         pos2[ni] = chaosPos2[ni] + (gridPos[ni] - chaosPos2[ni]) * ep;
       }
       nodeGeo.attributes.position.needsUpdate = true;
 
-      /* Fade in grid lines as order is achieved */
       var lineOpacity = Math.max(0, (ep - 0.6) / 0.4) * 0.35;
       lineSegs.forEach(function (lm) { lm.opacity = lineOpacity; });
 
-      /* Node size grows with order */
-      nodeMat.size = 0.06 + ep * 0.06;
+      nodeMat.size = 0.045 + ep * 0.05;
       nodeMat.opacity = 0.5 + ep * 0.4;
 
-      /* Slow rotation */
-      var groupObj = nodePoints;
       nodePoints.rotation.y = Math.sin(t * 0.2) * 0.4 + t * 0.05;
       nodePoints.rotation.x = Math.sin(t * 0.15) * 0.12;
       lineGroup.rotation.y  = nodePoints.rotation.y;
