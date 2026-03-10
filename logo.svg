@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <!--
+    Luris Logo: Calligraphic "L" with Scales of Justice
+    The vertical stroke of the L rises up to become the pivot of a balance.
+    Two scale pans hang from the beam. A decorative curl finishes the base.
+  -->
+
+  <!-- Main L stroke: flowing calligraphic vertical stroke -->
+  <path d="
+    M 120 22
+    C 120 22, 118 30, 118 40
+    L 118 150
+    C 118 160, 115 168, 108 172
+    C 100 177, 88 180, 78 180
+    C 68 180, 60 178, 58 180
+  " stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Decorative tail curl at bottom of L -->
+  <path d="
+    M 58 180
+    C 52 183, 50 190, 56 195
+    C 62 200, 72 198, 80 193
+    C 88 188, 93 180, 90 174
+  " stroke="currentColor" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Balance beam extending from top of L -->
+  <path d="
+    M 48 30
+    C 55 24, 65 22, 120 22
+    C 175 22, 185 24, 192 30
+  " stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- Small decorative pivot at top -->
+  <circle cx="120" cy="18" r="4" fill="currentColor"/>
+  <line x1="120" y1="22" x2="120" y2="18" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Left chain strings -->
+  <line x1="60" y1="25" x2="52" y2="80" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="60" y1="25" x2="68" y2="80" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Left scale pan (curved bowl) -->
+  <line x1="38" y1="80" x2="82" y2="80" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="
+    M 38 80
+    C 38 80, 42 100, 60 100
+    C 78 100, 82 80, 82 80
+  " stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Right chain strings -->
+  <line x1="180" y1="25" x2="172" y2="70" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="180" y1="25" x2="188" y2="70" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Right scale pan (curved bowl, slightly higher = lighter) -->
+  <line x1="158" y1="70" x2="202" y2="70" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="
+    M 158 70
+    C 158 70, 162 90, 180 90
+    C 198 90, 202 70, 202 70
+  " stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>
