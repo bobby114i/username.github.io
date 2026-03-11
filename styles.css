@@ -162,8 +162,9 @@ p:last-child {
 .brand-link {
   text-decoration: none;
   display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
+  align-items: baseline;
+  gap: 0;
+  position: relative;
 }
 
 .brand-logo {
@@ -177,8 +178,41 @@ p:last-child {
   letter-spacing: -0.04em;
 }
 
+.brand-name {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: -0.03em;
+  transition: color var(--ease);
+}
+
+.brand-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-teal) 0%, rgba(0, 180, 216, 0.15) 100%);
+  border-radius: 1px;
+  transform: scaleX(0.85);
+  transform-origin: left;
+  transition: transform var(--ease), opacity var(--ease);
+  opacity: 0.6;
+}
+
 .brand-link:hover .brand-logo {
   text-shadow: 0 0 14px rgba(0, 180, 216, 0.55);
+}
+
+.brand-link:hover .brand-name {
+  color: #fff;
+}
+
+.brand-link:hover::after {
+  transform: scaleX(1);
+  opacity: 1;
 }
 
 .top-nav {
