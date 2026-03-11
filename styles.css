@@ -167,16 +167,18 @@ p:last-child {
 }
 
 .brand-logo {
-  width: 32px;
-  height: 32px;
   flex-shrink: 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1;
   color: var(--accent-teal);
-  filter: drop-shadow(0 0 6px rgba(0, 180, 216, 0.35));
-  transition: filter var(--ease);
+  text-shadow: 0 0 8px rgba(0, 180, 216, 0.35);
+  transition: text-shadow var(--ease);
+  letter-spacing: -0.04em;
 }
 
 .brand-link:hover .brand-logo {
-  filter: drop-shadow(0 0 10px rgba(0, 180, 216, 0.55));
+  text-shadow: 0 0 14px rgba(0, 180, 216, 0.55);
 }
 
 .brand-link .eyebrow {
