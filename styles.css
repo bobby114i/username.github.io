@@ -2853,3 +2853,78 @@ body.dark-body {
     padding: 4.5rem 1.25rem;
   }
 }
+
+/* ── Skip-to-content link ────────────────────────── */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 10000;
+  padding: 0.75rem 1.25rem;
+  background: var(--accent-indigo);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ── Focus indicators ────────────────────────────── */
+
+*:focus-visible {
+  outline: 2px solid var(--accent-indigo-light, #818CF8);
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent-indigo-light, #818CF8);
+  outline-offset: 2px;
+}
+
+/* ── Form validation styles ──────────────────────── */
+
+.form-error {
+  display: block;
+  min-height: 1.25rem;
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  color: var(--status-red, #F87171);
+  line-height: 1.4;
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--status-red, #F87171);
+  box-shadow: 0 0 0 1px var(--status-red, #F87171);
+}
+
+.form-success {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.form-success h2 {
+  color: var(--status-green, #34D399);
+  margin-bottom: 1rem;
+}
+
+.form-success p {
+  color: var(--text-body);
+  max-width: 480px;
+  margin: 0.5rem auto;
+}
+
+.form-success a {
+  color: var(--accent-indigo);
+  text-decoration: underline;
+}

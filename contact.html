@@ -7,14 +7,43 @@
     <script>if(location.protocol!=='https:')location.replace('https:'+location.href.slice(location.protocol.length));</script>
     <title>Contact | Luris</title>
     <meta name="description" content="Get in touch with Luris to request a demo or learn more about our legal risk infrastructure products." />
+    <link rel="canonical" href="https://www.luris.com.au/contact.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Luris" />
+    <meta property="og:title" content="Contact | Luris" />
+    <meta property="og:description" content="Get in touch with Luris to request a demo or learn more about our legal risk infrastructure products." />
+    <meta property="og:url" content="https://www.luris.com.au/contact.html" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Contact | Luris" />
+    <meta name="twitter:description" content="Get in touch with Luris to request a demo or learn more about our legal risk infrastructure products." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact Luris",
+      "url": "https://www.luris.com.au/contact.html",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "Luris Pty Ltd",
+        "email": "contact@luris.com.au",
+        "url": "https://www.luris.com.au"
+      }
+    }
+    </script>
+    <!-- Google Analytics 4 - Replace GA_MEASUREMENT_ID with your actual ID -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','GA_MEASUREMENT_ID');</script>
+    -->
     <script src="main.js" defer></script>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="site-header">
       <div class="site-header-inner">
         <a class="brand-link" href="index.html">
@@ -36,7 +65,7 @@
       </div>
     </header>
 
-    <main class="page-wrapper">
+    <main id="main-content" class="page-wrapper">
       <section class="full-section full-section--dark">
         <div class="section-inner">
           <div class="product-hero">
@@ -49,14 +78,25 @@
 
       <section class="full-section full-section--light">
         <div class="section-inner animate-on-scroll">
-          <form class="contact-form" action="mailto:contact@luris.com.au" method="POST" enctype="text/plain">
+          <form class="contact-form" id="contact-form" action="https://formsubmit.co/contact@luris.com.au" method="POST">
+            <!-- Honeypot field for spam protection — hidden from real users -->
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+            <!-- Disable captcha page redirect -->
+            <input type="hidden" name="_captcha" value="false" />
+            <!-- Return to a thank-you anchor on this page -->
+            <input type="hidden" name="_next" value="https://www.luris.com.au/contact.html#thank-you" />
+            <!-- Subject line for the email -->
+            <input type="hidden" name="_subject" value="New demo request from luris.com.au" />
+
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" id="name" name="name" required placeholder="Your full name" />
+              <input type="text" id="name" name="name" required placeholder="Your full name" aria-required="true" />
+              <span class="form-error" id="name-error" role="alert" aria-live="polite"></span>
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" required placeholder="you@example.com" />
+              <input type="email" id="email" name="email" required placeholder="you@example.com" aria-required="true" />
+              <span class="form-error" id="email-error" role="alert" aria-live="polite"></span>
             </div>
             <div class="form-group">
               <label for="organisation">Organisation <span style="font-weight:400;color:var(--text-muted);">(optional)</span></label>
@@ -66,8 +106,15 @@
               <label for="message">Message <span style="font-weight:400;color:var(--text-muted);">(optional)</span></label>
               <textarea id="message" name="message" placeholder="Tell us about your needs or which products interest you"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Send Request</button>
+            <button type="submit" class="btn btn-primary" id="submit-btn">Send Request</button>
           </form>
+
+          <!-- Thank-you message shown after successful submission -->
+          <div class="form-success" id="thank-you" style="display:none;">
+            <h2>Thank you for your enquiry</h2>
+            <p>We've received your demo request and will be in touch within one business day.</p>
+            <p>If you need immediate assistance, email us at <a href="mailto:contact@luris.com.au">contact@luris.com.au</a>.</p>
+          </div>
         </div>
       </section>
     </main>
@@ -95,5 +142,59 @@
         <p>&copy; 2026 Luris Pty Ltd</p>
       </div>
     </footer>
+
+    <script>
+    (function () {
+      // Show thank-you message if redirected back with #thank-you hash
+      if (window.location.hash === '#thank-you') {
+        var form = document.getElementById('contact-form');
+        var success = document.getElementById('thank-you');
+        if (form && success) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        }
+      }
+
+      // Client-side validation
+      var form = document.getElementById('contact-form');
+      if (!form) return;
+
+      form.addEventListener('submit', function (e) {
+        var valid = true;
+
+        var nameInput = document.getElementById('name');
+        var nameError = document.getElementById('name-error');
+        if (!nameInput.value.trim()) {
+          nameError.textContent = 'Please enter your name.';
+          nameInput.setAttribute('aria-invalid', 'true');
+          nameInput.setAttribute('aria-describedby', 'name-error');
+          valid = false;
+        } else {
+          nameError.textContent = '';
+          nameInput.removeAttribute('aria-invalid');
+          nameInput.removeAttribute('aria-describedby');
+        }
+
+        var emailInput = document.getElementById('email');
+        var emailError = document.getElementById('email-error');
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailInput.value.trim() || !emailPattern.test(emailInput.value.trim())) {
+          emailError.textContent = 'Please enter a valid email address.';
+          emailInput.setAttribute('aria-invalid', 'true');
+          emailInput.setAttribute('aria-describedby', 'email-error');
+          valid = false;
+        } else {
+          emailError.textContent = '';
+          emailInput.removeAttribute('aria-invalid');
+          emailInput.removeAttribute('aria-describedby');
+        }
+
+        if (!valid) {
+          e.preventDefault();
+        }
+      });
+    })();
+    </script>
+    <noscript><style>.animate-on-scroll{opacity:1!important;transform:none!important;}</style></noscript>
   </body>
 </html>

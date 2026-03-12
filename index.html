@@ -7,13 +7,58 @@
     <script>if(location.protocol!=='https:')location.replace('https:'+location.href.slice(location.protocol.length));</script>
     <title>Luris | Legal Risk Infrastructure</title>
     <meta name="description" content="Purpose-built software for Australian legal professionals. Desktop-first. Privacy-conscious. Operationally practical." />
+    <link rel="canonical" href="https://www.luris.com.au/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Luris" />
+    <meta property="og:title" content="Luris | Legal Risk Infrastructure" />
+    <meta property="og:description" content="Purpose-built software for Australian legal professionals. Desktop-first. Privacy-conscious. Operationally practical." />
+    <meta property="og:url" content="https://www.luris.com.au/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Luris | Legal Risk Infrastructure" />
+    <meta name="twitter:description" content="Purpose-built software for Australian legal professionals. Desktop-first. Privacy-conscious. Operationally practical." />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Luris Pty Ltd",
+          "url": "https://www.luris.com.au",
+          "email": "contact@luris.com.au",
+          "description": "Purpose-built software for Australian legal professionals."
+        },
+        {
+          "@type": "WebSite",
+          "name": "Luris",
+          "url": "https://www.luris.com.au"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Luris Platform Professional",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Windows, macOS",
+          "description": "Unified legal risk infrastructure combining deadline tracking, filing compliance, and costs analysis for Australian legal professionals.",
+          "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/OnlineOnly"
+          }
+        }
+      ]
+    }
+    </script>
+    <!-- Google Analytics 4 - Replace GA_MEASUREMENT_ID with your actual ID -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','GA_MEASUREMENT_ID');</script>
+    -->
   </head>
   <body class="dark-body">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Navigation -->
     <header class="site-header">
@@ -39,7 +84,7 @@
       </div>
     </header>
 
-    <main class="page-wrapper">
+    <main id="main-content" class="page-wrapper">
 
       <!-- ═══════════════════════════════════════════════════════════
            HERO: Full-viewport WebGL canvas + copy
@@ -415,5 +460,6 @@
     <!-- Three.js from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
     <script src="main.js" defer></script>
+    <noscript><style>.animate-on-scroll{opacity:1!important;transform:none!important;}.hero-canvas,.bento-canvas-wrap canvas{display:none;}</style></noscript>
   </body>
 </html>
